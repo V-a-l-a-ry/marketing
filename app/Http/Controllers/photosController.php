@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\photos;
 
 class photosController extends Controller
 {
    // Display a listing of the photos.
    public function index()
    {
-       $photos = Photo::all(); // Retrieve all photos
+       $photos = photos::all(); // Retrieve all photos
        return view('photos.index', compact('photos')); // Return view with photos
    }
 
@@ -39,14 +40,14 @@ class photosController extends Controller
    // Display the specified photo.
    public function show($id)
    {
-       $photo = Photo::findOrFail($id); // Find the photo by ID
+       $photo = photos::findOrFail($id); // Find the photo by ID
        return view('photos.show', compact('photo')); // Return view with the photo
    }
 
    // Show the form for editing the specified photo.
    public function edit($id)
    {
-       $photo = Photo::findOrFail($id); // Find the photo by ID
+       $photo = photos::findOrFail($id); // Find the photo by ID
        return view('photos.edit', compact('photo')); // Return edit form view
    }
 
@@ -57,7 +58,7 @@ class photosController extends Controller
            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
        ]);
 
-       $photo = Photo::findOrFail($id);
+       $photo = photos::findOrFail($id);
        $photo->path = $request->file('photo')->store('photos', 'public');
        $photo->save(); // Update the photo record
 
@@ -67,7 +68,7 @@ class photosController extends Controller
    // Remove the specified photo from storage.
    public function destroy($id)
    {
-       $photo = Photo::findOrFail($id);
+       $photo = photos::findOrFail($id);
        $photo->delete(); // Delete the photo record
        return redirect()->route('photos.index'); // Redirect back to the photos list
    }
