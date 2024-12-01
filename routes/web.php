@@ -6,7 +6,7 @@ use App\Http\Controllers\eventsController;
 use App\Http\Controllers\luminariesController;
 use App\Http\Controllers\galleryController;
 use App\Http\Controllers\mentorshipController;
-use App\Http\Controllers\newsletterController;
+use App\Http\Controllers\NewsletterController;
 
 
 
@@ -18,7 +18,7 @@ Route::resource('events', eventsController::class);
 Route::resource('gallery', galleryController::class);
 Route::resource('luminaries', luminariesController::class);
 Route::resource('mentorship', mentorshipController::class);
-Route::resource('newsletter', newsletterController::class);
+Route::resource('Newsletter', NewsletterController::class);
 Route::get('/test-sqlite', function () {
     \Illuminate\Support\Facades\DB::table('sqlite_master')->get();
     return 'SQLite is working!';
