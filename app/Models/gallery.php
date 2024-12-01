@@ -9,7 +9,7 @@ class gallery extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['title', 'description', 'coverimage'];
 
     public function photos()
     {
