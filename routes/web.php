@@ -1,25 +1,31 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\photosController;
-use App\Http\Controllers\eventsController;
-use App\Http\Controllers\luminariesController;
 use App\Http\Controllers\galleryController;
-use App\Http\Controllers\mentorshipController;
-use App\Http\Controllers\newsletterController;
-
+use App\Http\Controllers\photosController;
 
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('photos', photosController::class);
-Route::resource('events', eventsController::class);
-Route::resource('gallery', galleryController::class);
-Route::resource('luminaries', luminariesController::class);
-Route::resource('mentorship', mentorshipController::class);
-Route::resource('newsletter', newsletterController::class);
-Route::get('/test-sqlite', function () {
-    \Illuminate\Support\Facades\DB::table('sqlite_master')->get();
-    return 'SQLite is working!';
+
+
+Route::prefix('backoffice')->group(function () {
+    Route::resource('gallery', GalleryController::class);
+    Route::get('gallery/{gallery}/photos', [PhotosController::class, 'index'])->name('gallery.photos');
+    Route::post('gallery/{gallery}/photos', [PhotosController::class, 'store'])->name('photos.store');
+    Route::delete('photos/{photo}', [PhotosController::class, 'destroy'])->name('photos.destroy');
+});
+
+
+Route::get('/article', function () {
+    return view('article');
+});
+
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::get('/newsletter', function () {
+    return view('newsletter');
 });
