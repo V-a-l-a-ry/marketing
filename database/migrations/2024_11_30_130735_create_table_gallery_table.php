@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_gallery', function (Blueprint $table) {
+        Schema::create('galleries', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description'); // Change 'description' to a valid type like 'text'
+            $table->string('cover_image')->nullable(); // Ensure file paths can be nullable
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_gallery');
+        Schema::dropIfExists('galleries');
     }
 };
