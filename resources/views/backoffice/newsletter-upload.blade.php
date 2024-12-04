@@ -1,90 +1,42 @@
-<div>
-    <section class="banner-area relative" id="home">
-        <div class="overlay overlay-bg"></div>
-        <div class="container">
-            <div class="row d-flex align-items-center justify-content-center">
-                <div class="about-content col-lg-12">
-                    <h1 class="text-white">Newsletter Upload</h1>
-                    <p class="text-white link-nav">
-                        <a href="{{ url('/') }}">Home</a>
-                        <span class="lnr lnr-arrow-right"></span>
-                        <a href="{{ route('newsletter.index') }}">Newsletter</a>
-                        <span class="lnr lnr-arrow-right"></span>
-                        Newsletter Upload
-                    </p>
-                </div>
-            </div>
+<div class="container">
+    <h2>Upload a New Newsletter</h2>
+    @if (session('success'))
+        <div id="success-message" style="color: green;">
+            {{ session('success') }}
         </div>
-    </section>
+        <script>
+            // Redirect to the newsletter page after 3 seconds
+            setTimeout(() => {
+                window.location.href = "{{ route('newsletter') }}";
+            }, 3000);
+        </script>
+    @endif
+    <form action="{{ route('/backoffice/newsletter') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="form-group">
+            <label for="title">Newsletter Title</label>
+            <input type="text" name="title" id="title" class="form-control" required>
+        </div>
 
-    <div class="container mt-50 mb-50">
-        <!-- Newsletter Upload Form -->
-        <form action="{{ route('newsletter.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select name="category" id="category" class="form-control" required>
+                <option value="luminaries">Luminaries</option>
+                <option value="feature">Feature</option>
+            </select>
+        </div>
 
-            <!-- Newsletter Title -->
-            <div class="mb-4">
-                <label for="title" class="form-label text-sm font-medium text-gray-700">Newsletter Title</label>
-                <input 
-                    type="text" 
-                    name="title" 
-                    id="title" 
-                    class="form-control mt-1 w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400" 
-                    required>
-                @error('title') 
-                    <span class="text-red-500 text-sm">{{ $message }}</span> 
-                @enderror
-            </div>
+        <div class="form-group">
+            <label for="folder">Upload Content Folder (ZIP or RAR)</label>
+            <input type="file" name="folder" id="folder" class="form-control" required>
+        </div>
 
-            <!-- Newsletter Content Folder -->
-            <div class="mb-4">
-                <label for="content_folder" class="form-label text-sm font-medium text-gray-700">Content Folder</label>
-                <input 
-                    type="file" 
-                    id="content_folder" 
-                    name="content_folder[]" 
-                    class="form-control mt-1 w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400" 
-                    webkitdirectory
-                    required>
-                @error('content_folder') 
-                    <span class="text-red-500 text-sm">{{ $message }}</span> 
-                @enderror
-            </div>
+        <div class="form-group">
+            <label for="photo">Upload Photo</label>
+            <input type="file" name="photo" id="photo" class="form-control" required>
+        </div>
 
-            <!-- Newsletter Category -->
-            <div class="mb-4">
-                <label for="category" class="form-label text-sm font-medium text-gray-700">Category</label>
-                <select 
-                    id="category" 
-                    name="category" 
-                    class="form-control mt-1 w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400" 
-                    required>
-                    <option value="Luminary">Luminary</option>
-                    <option value="Featured Newsletter">Featured Newsletter</option>
-                </select>
-                @error('category') 
-                    <span class="text-red-500 text-sm">{{ $message }}</span> 
-                @enderror
-            </div>
-
-            <!-- Submit Button -->
-            <div class="mt-4">
-                <button 
-                    type="submit" 
-                    class="btn btn-primary px-4 py-2 shadow-sm hover:shadow-lg transition duration-300">
-                    Upload Newsletter
-                </button>
-            </div>
-        </form>
-
-        <!-- Success Message -->
-        @if (session()->has('message'))
-            <div class="alert alert-success mt-4">
-                {{ session('message') }}
-            </div>
-        @endif
-    </div>
-    <!-- CKEditor 5 CDN -->
-<script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
-
+        <button type="submit" class="btn btn-primary mt-3">Upload</button>
+    </form>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </div>
