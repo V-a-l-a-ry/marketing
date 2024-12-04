@@ -5,17 +5,28 @@ use App\Http\Controllers\galleryController;
 use App\Http\Controllers\photosController;
 
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 
-Route::prefix('backoffice')->group(function () {
-    Route::resource('gallery', GalleryController::class);
-    Route::get('gallery/{gallery}/photos', [PhotosController::class, 'index'])->name('gallery.photos');
-    Route::post('gallery/{gallery}/photos', [PhotosController::class, 'store'])->name('photos.store');
-    Route::delete('photos/{photo}', [PhotosController::class, 'destroy'])->name('photos.destroy');
-});
+Route::get('/galleries',[GalleryController::class,'index']);
+
+Route::get('/gallery/{gallery}/photos/{photo}', [photosController::class, 'image']);
+
+Route::get('/gallery/create', [GalleryController::class, 'create']);
+Route::post('/gallery',[GalleryController::class,'store']);
+Route::get('/gallery/{gallery}/edit', [GalleryController::class, 'edit']);
+Route::put('/gallery/{gallery}',[GalleryController::class, 'update']);
+Route::delete('/gallery/{gallery}',[GalleryController::class, 'delete']);
+
+
+Route::get('/gallery/{gallery}/upload', [photosController::class, 'create']);
+Route::post('/gallery/{gallery}/images', [photosController::class, 'store']);
+Route::get('/gallery/{gallery}/photos/{photo}/edit', [photosController::class, 'edit']);
+
+Route::get('/gallery/{gallery}', [photosController::class, 'show']);
 
 
 Route::get('/article', function () {

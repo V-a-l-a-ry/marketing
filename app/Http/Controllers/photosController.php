@@ -2,74 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gallery;
+use App\Models\Photo;
 use Illuminate\Http\Request;
-use App\Models\photos;
 
 class photosController extends Controller
 {
-   // Display a listing of the photos.
-   public function index()
-   {
-       $photos = photos::all(); // Retrieve all photos
-       return view('photos.index', compact('photos')); // Return view with photos
-   }
+    public function show(Gallery $gallery){
+        // dd($gallery->photos);
+        return view('backoffice.show',[
+            'gallery' => $gallery,
+            'images'=>$gallery->photos
+        ]);
+    }
 
-   // Show the form for creating a new photo.
-   public function create()
-   {
-       return view('photos.create'); // Return the form for creating a photo
-   }
+    // You need to tell Laravel explicitly which model each route parameter
+    // should bind to by updating the controller method to expect both the Gallery and Photo models
 
-   // Store a newly created photo in storage.
-   public function store(Request $request)
-   {
-       $validated = $request->validate([
-           'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-       ]);
+    public function image(Gallery $gallery, Photo $photo){
+        return view('backoffice.images',[
+            
+            'image'=>$photo
+        ]);
+    } 
 
-       // Store the photo file
-       $photoPath = $request->file('photo')->store('photos', 'public');
+    public function create(Gallery $gallery){
+        return view('backoffice.photoForm', ['gallery' => $gallery]);
+    }
+    
+    public function store(Request $request, Gallery $gallery){
+    
+        $request->validate([
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo_description' => 'nullable|string',
+            'photo_comment' => 'nullable|string',
+        ]);
+    
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $imageFile) {
+                $imagePath = $imageFile->store('images', 'public');
+    
+                Photo::create([
+                    'path' => $imagePath,
+                    'gallery_id' => $gallery->id,
+                    'photo_description' => $request->input('photo_description', null),
+                    'photo_comment' => $request->input('photo_comment', null),
+                    'Upload_time' => now(),
+                ]);
+            }
+         }
 
-       $photo = new Photo();
-       $photo->path = $photoPath;
-       $photo->save(); // Save the new photo record
+         return redirect('/gallery/'. $gallery->id)->with('success', 'Photo uploaded successfully.');
+    }
 
-       return redirect()->route('photos.index'); // Redirect back to the photos list
-   }
-
-   // Display the specified photo.
-   public function show($id)
-   {
-       $photo = photos::findOrFail($id); // Find the photo by ID
-       return view('photos.show', compact('photo')); // Return view with the photo
-   }
-
-   // Show the form for editing the specified photo.
-   public function edit($id)
-   {
-       $photo = photos::findOrFail($id); // Find the photo by ID
-       return view('photos.edit', compact('photo')); // Return edit form view
-   }
-
-   // Update the specified photo in storage.
-   public function update(Request $request, $id)
-   {
-       $validated = $request->validate([
-           'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-       ]);
-
-       $photo = photos::findOrFail($id);
-       $photo->path = $request->file('photo')->store('photos', 'public');
-       $photo->save(); // Update the photo record
-
-       return redirect()->route('photos.index'); // Redirect back to the photos list
-   }
-
-   // Remove the specified photo from storage.
-   public function destroy($id)
-   {
-       $photo = photos::findOrFail($id);
-       $photo->delete(); // Delete the photo record
-       return redirect()->route('photos.index'); // Redirect back to the photos list
-   }
+    public function edit(Gallery $gallery, Photo $photo){
+        return view('backoffice.editPhotos', compact('gallery', 'photo'));
+    }
 }
