@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('folder_path')->nullable(); // To store the path of the uploaded folder
+            $table->string('photo_path');
             $table->enum('category', ['luminary', 'featured']); // Category field with predefined options
             $table->timestamps();
         });

@@ -4,45 +4,54 @@ namespace App\Http\Controllers;
 
 use App\Models\Newsletter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NewsletterController extends Controller
 {
-    // Show the form to upload a new newsletter
+
+    
+
     public function create()
     {
-        return view('newsletter-upload'); // Pointing to 'newsletter-upload.blade.php' view
+        return view('newsletter');
     }
-
-    // Store the uploaded newsletter in the database
+    
     public function store(Request $request)
     {
-        // Validate the request
         $request->validate([
             'title' => 'required|string|max:255',
-            'folder_path' => 'nullable|file|mimes:zip', // Assuming you want to upload a zip folder
-            'category' => 'required|in:luminary,featured',
+            'category' => 'required|in:luminaries,feature',
+            'folder' => 'required|file|mimes:zip,rar',
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-
-        // Handle the file upload if there's one
-        if ($request->hasFile('folder_path')) {
-            $folderPath = $request->file('folder_path')->store('newsletters', 'public');
-        }
-
-        // Create a new newsletter record in the database
+    
+        // Handle folder upload
+        $folderPath = $request->file('folder')->store('newsletter/folders', 'public');
+    
+        // Handle photo upload
+        $photoPath = $request->file('photo')->store('newsletter/photos', 'public');
+    
+        // Save newsletter to the database
         Newsletter::create([
             'title' => $request->title,
-            'folder_path' => $folderPath ?? null,
             'category' => $request->category,
+            'folder_path' => $folderPath,
+            'photo_path' => $photoPath,
         ]);
-
-        // Redirect back with a success message
-        return redirect()->route('newsletter.create')->with('message', 'Newsletter uploaded successfully!');
+    
+        return redirect()->route('newsletter')->with('success', 'Newsletter uploaded successfully!');
     }
-
-    // Display all newsletters (example of an index method)
     public function index()
-    {
-        $newsletters = Newsletter::all(); // Get all newsletters
-        return view('newsletter.index', compact('newsletters'));
-    }
+{
+    $newsletter = Newsletter::all(); // Fetch all newsletters
+    $newsletter = Storage::files('public/newsletters');
+    return view('newsletter');
 }
+public function showNewsletters()
+{
+    $newsletters = Newsletter::all(); // Assuming you have a `Newsletter` model.
+    return view('newsletter', ['newsletter' => $newsletters]);
+}
+
+    
+    }
