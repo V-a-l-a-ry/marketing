@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up()
 {
-    Schema::create('photos', function (Blueprint $table) {
-        $table->id();
-        $table->string('path');                  // Path to the photo
-        $table->morphs('imageable');
-        $table->foreignId('user_id')->constrained()->onDelete('cascade');            // Polymorphic relationship columns
-        $table->timestamps();
-    });
+    //Schema::create('photos', function (Blueprint $table) {
+        //$table->id();
+      //  $table->string('path');                  // Path to the photo
+       // $table->morphs('imageable');
+       // $table->foreignId('user_id')->constrained()->onDelete('cascade');            // Polymorphic relationship columns
+       // $table->timestamps();
+  //  });
     }
 
     /**
