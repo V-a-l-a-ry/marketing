@@ -24,6 +24,7 @@ style="background-image: url('./img/body.jpeg');">
 
   <!-- Main Content -->
   <main class="container mx-auto px-4 py-8">
+ 
     
     <!-- Featured Newsletter -->
     <section class="mb-12">
@@ -55,6 +56,22 @@ style="background-image: url('./img/body.jpeg');">
             <p class="text-sm text-gray-600"><strong>Topics:</strong> Research, Events</p>
             <a href="#" class="inline-block mt-4 bg-green-800 text-white py-2 px-4 hover:bg-green-400">Read Now</a>
           </div>
+          @if(isset($newsletter) && $newsletter->isNotEmpty())
+          <li><a href="{{ Storage::url($newsletter) }}" target="_blank">{{ basename($newsletter) }}</a></li>
+    <h1>Uploaded Newsletters</h1>
+    <ul>
+        @foreach ($newsletter as $item)
+            <li>
+                <h2>{{ $item->title }}</h2>
+                <p>{{ $item->category }}</p>
+            </li>
+        @endforeach
+    </ul>
+@else
+    <p>No newsletters available.</p>
+@endif
+
+
         </div>
 
         <div class="bg-white shadow-lg overflow-hidden">
@@ -119,7 +136,8 @@ style="background-image: url('./img/body.jpeg');">
         <button type="submit" class="bg-green-800 text-white py-2 px-6 hover:bg-green-400">Subscribe</button>
       </form>
     </section>
-    
+    <a href="{{ route('newsletter.create') }}" class="btn btn-success">Upload New Newsletter</a>
+
   </main>
 
   <!-- Footer -->
