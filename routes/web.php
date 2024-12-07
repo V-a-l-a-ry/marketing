@@ -3,13 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\galleryController;
 use App\Http\Controllers\photosController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\UploadController;
+use App\Http\Controllers\NewsletteruploadController;
 
 
 
 Route::get('/', function () {
     return view('welcome');
 });
-
 
 Route::get('/galleries',[GalleryController::class,'index']);
 
