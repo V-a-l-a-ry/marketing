@@ -20,17 +20,17 @@
                                     More Photos
                                 </a>
 
-                                {{-- <a href="/gallery/{{ $gallery->id }}/edit" class="text-green-400 hover:underline mb-2">
+                                <a href="/gallery/{{ $gallery->id }}/edit" class="text-green-400 hover:underline mb-2">
                                     Edit
-                                </a> --}}
+                                </a>
 
-                                {{-- <form method="POST" action="/gallery/{{ $gallery->id }}" class="inline-block">
+                                <form method="POST" action="/gallery/{{ $gallery->id }}" class="inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="py-2 px-4 bg-red-500 text-white hover:bg-red-600">
                                         Delete
                                     </button>
-                                </form> --}}
+                                </form>
                             </div>
                         </div>
                     @endforeach
@@ -40,10 +40,19 @@
 
             <!-- Footer -->
             <div class="footer py-4">
-                {{-- <div class="container-fluid text-center">
+                <div class="container-fluid text-center">
                     <a href="/gallery/create" class="btn btn-primary">Create Gallery</a>
-                </div> --}}
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Logout Button -->
+<form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-200">
+        Log Out
+    </button>
+</form>
+
 </x-layout>

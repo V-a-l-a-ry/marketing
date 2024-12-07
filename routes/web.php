@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\galleryController;
 use App\Http\Controllers\photosController;
@@ -8,10 +9,21 @@ use App\Http\Controllers\UploadController;
 use App\Http\Controllers\NewsletteruploadController;
 
 
-
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('backoffice.galleries');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
 
 Route::get('/galleries',[GalleryController::class,'index']);
 
@@ -41,4 +53,11 @@ Route::get('/home', function () {
 
 Route::get('/newsletter', function () {
     return view('newsletter');
+});
+
+use App\Http\Controllers\BackofficeController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [BackofficeController::class, 'dashboard'])->name('dashboard');
+    // Other backoffice routes
 });
