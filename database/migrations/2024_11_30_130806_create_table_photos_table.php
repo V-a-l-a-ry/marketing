@@ -9,22 +9,26 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
-{
-    //Schema::create('photos', function (Blueprint $table) {
-        //$table->id();
-      //  $table->string('path');                  // Path to the photo
-       // $table->morphs('imageable');
-       // $table->foreignId('user_id')->constrained()->onDelete('cascade');            // Polymorphic relationship columns
-       // $table->timestamps();
-  //  });
-    }
+
+    public function up(): void
+    {
+        Schema::create('photos', function (Blueprint $table) {
+            $table->id();
+            $table->string('path');
+            $table->text('photo_description')->nullable();
+            $table->text('photo_comment')->nullable(); 
+            $table->datetime('Upload_time');
+            $table->foreignId('gallery_id')->nullable()->constrained('galleries')->onDelete('cascade');
+            $table->string('photo_path')->nullable()->after('gallery_id');
+            $table->timestamps();
+        });
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_photos');
+        Schema::dropIfExists('photos');
     }
 };

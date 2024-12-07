@@ -24,7 +24,7 @@
   </head>
 
   <body
-    class="bg-gray-100 text-gray-800 font-sans bg-cover bg-auto bg-center"
+    class="bg-gray-100 text-gray-800 font-sans bg-auto bg-center"
     style="background-image: url('./img/body.jpeg')"
   >
     <header class="bg-green-800 text-white flex items-center justify-center">
@@ -220,7 +220,7 @@
       <div class="mx-auto flex flex-col md:flex-row md:gap-8">
         <div class="w-1/2 flex gap-4">
           <div
-            class="w-1/2 hidden md:block md:flex md:flex-col bg-green-800 text-white text-center font-bold md:text-4xl md:items-center md:justify-center h-full"
+            class="w-1/2 hidden md:block md:flex-col bg-green-800 text-white text-center font-bold md:text-4xl md:items-center md:justify-center h-full"
           >
             1st
             <p class="text-white text-sm font-semibold py-4">
@@ -229,7 +229,7 @@
           </div>
 
           <div
-            class="w-1/2 hidden md:block md:flex md:flex-col bg-yellow-400 text-white text-center font-bold md:text-4xl md:items-center md:justify-center h-full"
+            class="w-1/2 hidden md:block md:flex-col bg-yellow-400 text-white text-center font-bold md:text-4xl md:items-center md:justify-center h-full"
           >
             1st
             <p class="text-white text-sm font-semibold py-4">
@@ -323,7 +323,7 @@
     </section>
 
     <section class="md:w-3/4 mx-auto mt-12 bg-white">
-      <div class="py-10 text-center py-8 space-y-6 text-green-600">
+      <div class="text-center py-8 space-y-6 text-green-600">
         <h3 class="text-3xl font-bold">Experience DeKUT Marketing</h3>
         <p class="w-3/4 mx-auto">
           The marketing team at DeKUT is a dynamic group of professionals
