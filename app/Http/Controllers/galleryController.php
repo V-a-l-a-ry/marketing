@@ -2,64 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Photo;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
-use App\Models\gallery;
-class galleryController extends Controller
+use Illuminate\Validation\Rule;
+
+class GalleryController extends Controller
 {
-    public function index()
-    {
-        $galleries = gallery::all();
-        return view('backoffice.gallery');
+    public function index(){
+        return view('gallery',[
+            'galleries'=>Gallery::latest()->get()
+        ]);
     }
 
-    public function create()
-    {
-        return view('backoffice.gallery');
+    public function create(){
+        return view('backoffice.galleryForm');
     }
 
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'coverimage' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+    public function store(Request $request){
+        $formField = $request->validate([
+            'name'=>['required',Rule::unique('galleries','name')],
+            'gallery_description'=>'required',
+            'gallery_comments'=>'required',
         ]);
 
-        dd($validated);
-        
-        gallery::create($validated);
-        return redirect()->route('gallery');
+        if($request->hasFile('thumbnail')){
+            $formField['thumbnail']= $request->file('thumbnail')->store('thumbnail','public');
+        }
+
+        Gallery::create($formField);
+
+        return redirect('/galleries')->with('message','gallery created successufully');
     }
 
-    public function show($id)
+    public function edit(Gallery $gallery)
     {
-        $gallery = gallery::findOrFail($id);
-        return view('gallery');
+
+       return view('backoffice.editGallery',['gallery'=>$gallery]);
     }
 
-    public function edit($id)
-    {
-        $gallery = gallery::findOrFail($id);
-        return view('backoffice.gallery');
-    }
-
-    public function update(Request $request, $id)
-    {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'coverimage' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+    public function update(Request $request, Gallery $gallery){
+        $formField = $request->validate([
+            'name'=>'required',
+            'gallery_description'=>'required',
+            'gallery_comments'=>'required',
         ]);
 
-        $gallery = gallery::findOrFail($id);
-        $gallery->update($validated);
-        return redirect()->route('backoffice.gallery');
+        if($request->hasFile('thumbnail')){
+            $formField['thumbnail']= $request->file('thumbnail')->store('thumbnail','public');
+        }
+
+        $gallery->update($formField);
+
+        return redirect('/galleries')->with('message','gallery updated successufully');
     }
 
-    public function destroy($id)
-    {
-        $gallery = gallery::findOrFail($id);
+    public function delete(Gallery $gallery){
         $gallery->delete();
-        return redirect()->route('backoffice.gallery');
+        return redirect('/galleries')->with('message','gallery deleted successufully');
     }
 }
