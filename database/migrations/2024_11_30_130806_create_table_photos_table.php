@@ -9,6 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
     public function up(): void
     {
         Schema::create('photos', function (Blueprint $table) {
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->string('photo_path')->nullable()->after('gallery_id');
             $table->timestamps();
         });
-    }
+
 
     /**
      * Reverse the migrations.
