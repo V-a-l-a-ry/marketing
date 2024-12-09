@@ -1,63 +1,34 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TwoFactorController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\galleryController;
-use App\Http\Controllers\photosController;
-use App\Http\Controllers\NewsletterController;
-use App\Http\Controllers\UploadController;
-use App\Http\Controllers\NewsletteruploadController;
+use App\Http\Controllers\AuthController;
 
-
+// Home Route
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('backoffice.galleries');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Authentication Routes
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
+Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [AuthController::class, 'register']);
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
-
-Route::get('/galleries',[GalleryController::class,'index']);
-
-Route::get('/gallery/{gallery}/photos/{photo}', [photosController::class, 'image']);
-
-Route::get('/gallery/create', [GalleryController::class, 'create']);
-Route::post('/gallery',[GalleryController::class,'store']);
-Route::get('/gallery/{gallery}/edit', [GalleryController::class, 'edit']);
-Route::put('/gallery/{gallery}',[GalleryController::class, 'update']);
-Route::delete('/gallery/{gallery}',[GalleryController::class, 'delete']);
-
-
-Route::get('/gallery/{gallery}/upload', [photosController::class, 'create']);
-Route::post('/gallery/{gallery}/images', [photosController::class, 'store']);
-Route::get('/gallery/{gallery}/photos/{photo}/edit', [photosController::class, 'edit']);
-
-Route::get('/gallery/{gallery}', [photosController::class, 'show']);
-
-
-Route::get('/article', function () {
-    return view('article');
-});
-
-Route::get('/home', function () {
-    return view('home');
-});
-
-Route::get('/newsletter', function () {
-    return view('newsletter');
-});
-
-use App\Http\Controllers\BackofficeController;
-
+// Two-Factor Authentication (OTP-based)
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [BackofficeController::class, 'dashboard'])->name('dashboard');
-    // Other backoffice routes
+    // Send OTP to the user's email
+    Route::get('twofactor/send', [TwoFactorController::class, 'sendOtp'])->name('twofactor.send');
+
+    // Show OTP verification form
+    Route::get('twofactor/verify', [TwoFactorController::class, 'showVerificationForm'])->name('twofactor.verify');
+
+    // Verify the OTP
+    Route::post('twofactor/verify', [TwoFactorController::class, 'verifyOtp'])->name('twofactor.verify');
+});
+
+// Dashboard Route (only accessible after successful 2FA verification)
+Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
+    return view('gallery');
 });
