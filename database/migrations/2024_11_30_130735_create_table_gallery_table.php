@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('gallery_description');
-            $table->text('gallery_comments');
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
+            $table->string('title');
+            $table->text('description'); // Change 'description' to a valid type like 'text'
+            $table->string('cover_image')->nullable(); // Ensure file paths can be nullable
             $table->timestamps();
-            $table->string('thumbnail');
         });
     }
 

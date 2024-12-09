@@ -6,7 +6,7 @@ use App\Models\Gallery;
 use App\Models\Photo;
 use Illuminate\Http\Request;
 
-class photosController extends Controller
+class PhotosController extends Controller
 {
     public function show(Gallery $gallery){
         // dd($gallery->photos);
