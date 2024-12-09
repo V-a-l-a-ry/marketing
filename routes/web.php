@@ -1,46 +1,34 @@
 <?php
 
+use App\Http\Controllers\TwoFactorController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\galleryController;
-use App\Http\Controllers\photosController;
-use App\Http\Controllers\NewsletterController;
-use App\Http\Controllers\UploadController;
-use App\Http\Controllers\NewsletteruploadController;
+use App\Http\Controllers\AuthController;
 
-
+// Home Route
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Authentication Routes
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
+Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [AuthController::class, 'register']);
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::prefix('backoffice')->group(function () {
-    Route::resource('gallery', GalleryController::class);
-    Route::get('gallery/{gallery}/photos', [PhotosController::class, 'index'])->name('gallery.photos');
-    Route::post('gallery/{gallery}/photos', [PhotosController::class, 'store'])->name('photos.store');
-    Route::delete('photos/{photo}', [PhotosController::class, 'destroy'])->name('photos.destroy');
-    Route::get('/newsletter', [NewsletterController::class, 'index'])->name('newsletter');
-    Route::get('/newsletters/create', [NewsletterController::class, 'create'])->name('newsletter.create');
-    Route::post('/newsletters/upload', [NewsletterController::class, 'store'])->name('newsletter.store');
-    //Route::get('/newsletters/upload', [NewsletterController::class, 'create'])->name('backoffice.newsletter-upload');
-    Route::get('/newsletters', [NewsletterController::class, 'showNewsletters']);
-    Route::post('/upload', [UploadController::class, 'upload'])->name('upload');
-    
+// Two-Factor Authentication (OTP-based)
+Route::middleware(['auth'])->group(function () {
+    // Send OTP to the user's email
+    Route::get('twofactor/send', [TwoFactorController::class, 'sendOtp'])->name('twofactor.send');
+
+    // Show OTP verification form
+    Route::get('twofactor/verify', [TwoFactorController::class, 'showVerificationForm'])->name('twofactor.verify');
+
+    // Verify the OTP
+    Route::post('twofactor/verify', [TwoFactorController::class, 'verifyOtp'])->name('twofactor.verify');
 });
 
-
-
-
-
-
-
-Route::get('/article', function () {
-    return view('article');
-});
-
-Route::get('/home', function () {
-    return view('home');
-});
-
-Route::get('/newsletter', function () {
-    return view('newsletter');
+// Dashboard Route (only accessible after successful 2FA verification)
+Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
+    return view('gallery');
 });
