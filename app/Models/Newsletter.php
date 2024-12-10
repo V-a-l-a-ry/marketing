@@ -9,14 +9,22 @@ class Newsletter extends Model
 {
     use HasFactory;
 
-    // Specify the table name if it differs from the default (optional)
-    protected $table = ' table_newsletter';
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'newsletters';
 
-    // Define the fillable attributes for mass assignment
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'title',
-        'folder_path',
-        'photo_path',
         'category',
+        'content',
+        'image_path',
     ];
 }
