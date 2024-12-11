@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Models;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Photo extends Model
+return new class extends Migration
 {
-    use HasFactory;
-
-    protected $fillable = [
-        'gallery_id',
-        'image_path',
-        'description',
-        'comment',
-    ];
-
-    // Relationship with Gallery
-    public function gallery()
+    public function up()
     {
-        return $this->belongsTo(Gallery::class);
+        Schema::create('photos', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('gallery_id')->constrained()->onDelete('cascade');
+            $table->string('image_path');
+            $table->text('description')->nullable();
+            $table->text('comment')->nullable();
+            $table->timestamps();
+        });
     }
-}
 
+    public function down()
+    {
+        Schema::dropIfExists('photos');
+    }
+};
