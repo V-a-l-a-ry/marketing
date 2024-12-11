@@ -67,19 +67,21 @@ Route::middleware(['auth'])->group(function () {
 
     // Show the form to edit a photo in a specific gallery
     Route::get('/gallery/{gallery}/photos/{photo}/edit', [PhotosController::class, 'edit'])->name('photos.edit');
+
+    Route::delete('/gallery/{gallery}', [GalleryController::class, 'delete'])->name('gallery.destroy');
 });
 
 // Newsletter Routes
 Route::middleware(['auth'])->group(function () {
     // Show the form to create a new newsletter
     Route::get('/newsletter/create', [NewsletterController::class, 'create'])->name('newsletter.create');
-    
+
     // Store a new newsletter
     Route::post('/newsletter/store', [NewsletterController::class, 'store'])->name('newsletter.store');
-    
+
     // Display all newsletters
     Route::get('/newsletters', [NewsletterController::class, 'showNewsletters'])->name('newsletters.index');
-    
+
     // Display the newsletters in a folder
     Route::get('/newsletter', [NewsletterController::class, 'index'])->name('newsletter');
 

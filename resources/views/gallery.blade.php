@@ -20,12 +20,12 @@
                             <a href="/gallery/{{ $gallery->id }}" class="px-4 py-2 text-center uppercase">View Photos</a>
                             <div class="space-x-4 mb-4 flex flex-col text-center">
                                 {{-- <a href="/gallery/{{ $gallery->id }}/edit" class="px-3 py-1 text-yellow-500 uppercase">Edit</a> --}}
-                                <form method="POST" action="/gallery/{{ $gallery->id }}" class="inline">
+                                <form method="POST" action="{{ route('gallery.destroy', $gallery->id) }}" class="inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button onclick="return confirm('Are you sure?')" 
-                                            class="px-3 py-1 text-red-500 uppercase text-center">Delete</button>
+                                    <button onclick="return confirm('Are you sure?')" class="px-3 py-1 text-red-500 uppercase text-center">Delete</button>
                                 </form>
+                                
                             </div>
                            
                         </div>

@@ -1,6 +1,6 @@
 <x-layout>
-    <div class="container">
-        <h1>Upload New Image</h1>
+    <div class="md:w-1/2 sm:w-5/6 w-full mx-auto">
+        <h1 class="font-bold text-center text-lg mb-4">Upload New Gallery</h1>
 
         @if(session('success'))
             <div class="alert alert-success">
