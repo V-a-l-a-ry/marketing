@@ -1,30 +1,27 @@
+<!-- resources/views/galleries/show.blade.php -->
+
 <x-layout>
-    <div class="site-section py-6" data-aos="fade">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="site-section-heading uppercase">{{ $gallery->name }}</h2>
-            </div>
-            <div id="lightgallery" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                @forelse ($images as $image)
-                    <a href="{{ $image->path ? asset('storage/' . $image->path) : asset('images/person_1.jpg') }}" class="relative group" data-sub-html="<h4>{{ $image->photo_comment }}</h4><p>{{ $image->photo_description }}</p>">
-                        <img src="{{ $image->path ? asset('storage/' . $image->path) : asset('images/person_1.jpg') }}" alt="Image" class="w-full h-auto shadow-sm transition-transform transform group-hover:scale-105">
-                    </a>
-                @empty
-                    <p class="text-center w-100 text-gray-500">No Image(s) Found</p>
-                @endforelse
-            </div>
-            <div class="text-center mt-6">
-                <a href="{{ route('photos.create', ['gallery' => $gallery->id]) }}" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded hover:bg-indigo-700 transition">Upload New Photos</a>
-            </div>
+    <div class="px-4 py-8" data-aos="fade" data-aos-delay="500">
+        <h2 class="text-3xl font-bold mb-6 uppercase text-center">{{ $galleryName }}</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            @if (!empty($images) && count($images) > 0)
+                @foreach ($images as $image)
+                    <div class="overflow-hidden shadow-md transform hover:scale-105 transition-transform duration-300">
+                        <img src="{{ asset($image) }}" alt="{{ basename($image) }}" class="w-full h-96 object-cover">
+                    </div>
+                @endforeach
+            @else
+                <div class="col-span-full text-center">
+                    <p class="text-gray-500 uppercase">No images found in this gallery.</p>
+                </div>
+            @endif
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="{{ route('galleries.index') }}" class="px-6 py-3 bg-blue-600 text-white text-lg font-semibold shadow hover:bg-blue-700 transition duration-300">
+                Back to Galleries
+            </a>
         </div>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            lightGallery(document.getElementById('lightgallery'), {
-                thumbnail: true,
-                animateThumb: true,
-                showThumbByDefault: true
-            });
-        });
-    </script>
 </x-layout>

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('newsletter', function (Blueprint $table) {
+        Schema::create('newsletters', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('folder_path')->nullable(); // To store the path of the uploaded folder
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('newsletter');
+        Schema::dropIfExists('newsletters');
     }
 };

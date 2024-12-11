@@ -57,6 +57,8 @@ class GalleryController extends Controller
         return redirect('/galleries')->with('message','gallery updated successufully');
     }
 
+    
+
     public function delete(Gallery $gallery){
         $gallery->delete();
         return redirect('/galleries')->with('message','gallery deleted successufully');
