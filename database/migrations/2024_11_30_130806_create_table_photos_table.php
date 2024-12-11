@@ -11,11 +11,12 @@ return new class extends Migration
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('gallery_id')->constrained()->onDelete('cascade');
-            $table->string('image_path');
-            $table->text('description')->nullable();
-            $table->text('comment')->nullable();
+            $table->string('path'); // Ensure this line exists
+            $table->string('photo_description')->nullable();
+            $table->string('photo_comment')->nullable();
             $table->timestamps();
         });
+        
     }
 
     public function down()
