@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Agu+Display&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+
 
     <!-- LightGallery CSS -->
     <link href="https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/css/lightgallery-bundle.min.css" rel="stylesheet">
@@ -20,8 +26,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
 </head>
 
-<body class="bg-gray-100 text-gray-800 font-sans bg-cover bg-auto bg-center"
-    style="background-image: url('./img/body.jpeg')">
+<body class="bg-gray-100 text-gray-800 font-sans bg-auto bg-center" style="font-family:'Josefin Sans', sans-serif;">
     <header class="bg-green-800 text-white flex items-center justify-center">
         <img src="./img/dekutlogo.png" class="w-12 mr-3" />
         <div>
@@ -126,7 +131,11 @@
         </ul>
     </nav>
 
-    {{ $slot }}
+    <div class="mx-auto">
+
+        {{ $slot }}
+    </div>
+
 
     <footer class="bg-green-900 text-white text-center p-6">
         <p>
