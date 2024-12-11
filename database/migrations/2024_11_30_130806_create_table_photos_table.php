@@ -6,28 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
-            $table->string('path');
-            $table->text('photo_description')->nullable();
-            $table->text('photo_comment')->nullable();
-            $table->datetime('upload_time'); // Renamed for consistent snake_case
-            $table->foreignId('gallery_id')->nullable()->constrained('galleries')->onDelete('cascade');
-            $table->string('photo_path')->nullable(); // Removed 'after' as it is not allowed in schema creation
+            $table->foreignId('gallery_id')->constrained()->onDelete('cascade');
+            $table->string('path'); // Ensure this line exists
+            $table->string('photo_description')->nullable();
+            $table->string('photo_comment')->nullable();
             $table->timestamps();
         });
+        
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('photos'); // Corrected the table name
+        Schema::dropIfExists('photos');
     }
 };

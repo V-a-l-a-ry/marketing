@@ -16,7 +16,7 @@ class GalleryController extends Controller
     }
 
     public function create(){
-        return view('backoffice.galleryForm');
+        return view('gallery.galleryform');
     }
 
     public function store(Request $request){
@@ -38,7 +38,7 @@ class GalleryController extends Controller
     public function edit(Gallery $gallery)
     {
 
-       return view('backoffice.editGallery',['gallery'=>$gallery]);
+       return view('gallery.editgallery',['gallery'=>$gallery]);
     }
 
     public function update(Request $request, Gallery $gallery){
