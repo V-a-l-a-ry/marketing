@@ -61,7 +61,7 @@ class PhotosController extends Controller
             ]);
         }
 
-        return redirect()->route('photos.index', ['gallery' => $galleryId])->with('success', 'Photos uploaded successfully');
+        return redirect()->route('photos.show', ['gallery' => $galleryId])->with('success', 'Photos uploaded successfully');
     }
 
 
