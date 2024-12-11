@@ -65,8 +65,8 @@ class PhotosController extends Controller
     }
 
 
-    public function edit(Gallery $gallery, Photo $photo)
-    {
-        return view('gallery.editphotos', compact('gallery', 'photo'));
-    }
+    // public function edit(Gallery $gallery, Photo $photo)
+    // {
+    //     return view('gallery.editphotos', compact('gallery', 'photo'));
+    // }
 }
