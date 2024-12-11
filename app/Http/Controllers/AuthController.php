@@ -72,7 +72,7 @@ class AuthController extends Controller
         Auth::login($user);
 
         // Redirect to 2FA setup if applicable or dashboard
-        return redirect()->route('twofactor.setup')->with('success', 'Registration successful! Please set up two-factor authentication.');
+        return redirect()->route('login');
     }
 
     /**

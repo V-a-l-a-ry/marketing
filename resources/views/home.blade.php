@@ -35,116 +35,101 @@
     </header>
 
     <!-- Navigation Menu -->
-    <nav class="md:py-6 text-green-800 bg-white">
-      <ul class="flex items-center justify-center gap-6">
-        <li class="nav-item font-bold mr-2">Home</li>
+    <nav class="sticky top-0 md:py-6 text-green-800 bg-white">
+        <ul class="flex items-center justify-center gap-6">
+            <li class="nav-item font-bold mr-2">
+                <a href="{{ url('/') }}">Home</a>
+            </li>
 
-        <!-- Academics Dropdown -->
-        <li class="relative" x-data="{ open: false }">
-          <button
-            class="nav-item font-bold flex items-center group mr-2 cursor-pointer"
-            @click="open = !open"
-          >
-            Academics
-          </button>
-          <div
-            x-show="open"
-            @click.away="open = false"
-            x-transition:enter="transition ease-out duration-200"
-            x-transition:enter-start="opacity-0 transform scale-95"
-            x-transition:enter-end="opacity-100 transform scale-100"
-            x-transition:leave="transition ease-in duration-150"
-            x-transition:leave-start="opacity-100 transform scale-100"
-            x-transition:leave-end="opacity-0 transform scale-95"
-            class="absolute left-0 top-full bg-white border border-gray-200 shadow-md mt-2 py-6 px-8 z-50 w-max"
-          >
-            <div class="flex gap-12">
-              <!-- Admission Section -->
-              <div>
-                <h3 class="font-bold text-green-800 mb-4">Admission</h3>
-                <ul class="space-y-2">
-                  <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
-                    <a
-                      href="https://www.dkut.ac.ke/index.php/academics/admission/application-procedure"
-                      >Application Procedure</a
-                    >
-                  </li>
-                  <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
-                    <a
-                      href="https://www.dkut.ac.ke/index.php/academics/admission/application-forms"
-                      >Application Forms</a
-                    >
-                  </li>
-                  <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
-                    <a href="https://admissions.dkut.ac.ke/">Apply Online</a>
-                  </li>
-                  <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
-                    <a
-                      href="https://www.dkut.ac.ke/index.php/academics/admission/admission-materials"
-                      >Admission Materials</a
-                    >
-                  </li>
-                  <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
-                    <a href="https://registration.dkut.ac.ke/"
-                      >First Year Registration 2024/2025</a
-                    >
-                  </li>
-                </ul>
-              </div>
-              <!-- Programmes Section -->
-              <div>
-                <h3 class="font-bold text-green-800 mb-4">Programmes</h3>
-                <ul class="space-y-2">
-                  <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
-                    <a
-                      href="https://www.dkut.ac.ke/index.php/academics/programmes/postgraduate-programmes"
-                      >Postgraduate Programmes</a
-                    >
-                  </li>
-                  <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
-                    <a
-                      href="https://www.dkut.ac.ke/index.php/academics/programmes/undergraduate-programmes"
-                      >Undergraduate Programmes</a
-                    >
-                  </li>
-                  <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
-                    <a
-                      href="https://www.dkut.ac.ke/index.php/academics/programmes/diploma-and-certificate-programmes"
-                      >Diploma and Certificate Programmes</a
-                    >
-                  </li>
-                  <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
-                    <a
-                      href="https://www.dkut.ac.ke/index.php/academics/programmes/professional-and-certification-courses"
-                      >Professional and Certification Courses</a
-                    >
-                  </li>
-                </ul>
-              </div>
-              <!-- Schools & Institutes Section -->
-              <div>
-                <h3 class="font-bold text-green-800 mb-4">
-                  <a
-                    href="https://www.dkut.ac.ke/index.php/academics/schools-institutes"
-                    >Schools & Institutes</a
-                  >
-                </h3>
-              </div>
-            </div>
-          </div>
-        </li>
+            <!-- Academics Dropdown -->
+            <li class="relative" x-data="{ open: false }">
+                <button class="nav-item font-bold flex items-center group mr-2 cursor-pointer" @click="open = !open">
+                    Academics
+                </button>
+                <div x-show="open" @click.away="open = false" x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 transform scale-95"
+                    x-transition:enter-end="opacity-100 transform scale-100"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 transform scale-100"
+                    x-transition:leave-end="opacity-0 transform scale-95"
+                    class="absolute left-0 top-full bg-white border border-gray-200 shadow-md mt-2 py-6 px-8 z-50 w-max">
+                    <div class="flex gap-12">
+                        <!-- Admission Section -->
+                        <div>
+                            <h3 class="font-bold text-green-800 mb-4">Admission</h3>
+                            <ul class="space-y-2">
+                                <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
+                                    <a
+                                        href="https://www.dkut.ac.ke/index.php/academics/admission/application-procedure">Application
+                                        Procedure</a>
+                                </li>
+                                <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
+                                    <a href="https://www.dkut.ac.ke/index.php/academics/admission/application-forms">Application
+                                        Forms</a>
+                                </li>
+                                <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
+                                    <a href="https://admissions.dkut.ac.ke/">Apply Online</a>
+                                </li>
+                                <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
+                                    <a href="https://www.dkut.ac.ke/index.php/academics/admission/admission-materials">Admission
+                                        Materials</a>
+                                </li>
+                                <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
+                                    <a href="https://registration.dkut.ac.ke/">First Year Registration 2024/2025</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Programmes Section -->
+                        <div>
+                            <h3 class="font-bold text-green-800 mb-4">Programmes</h3>
+                            <ul class="space-y-2">
+                                <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
+                                    <a
+                                        href="https://www.dkut.ac.ke/index.php/academics/programmes/postgraduate-programmes">Postgraduate
+                                        Programmes</a>
+                                </li>
+                                <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
+                                    <a
+                                        href="https://www.dkut.ac.ke/index.php/academics/programmes/undergraduate-programmes">Undergraduate
+                                        Programmes</a>
+                                </li>
+                                <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
+                                    <a
+                                        href="https://www.dkut.ac.ke/index.php/academics/programmes/diploma-and-certificate-programmes">Diploma
+                                        and Certificate Programmes</a>
+                                </li>
+                                <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
+                                    <a
+                                        href="https://www.dkut.ac.ke/index.php/academics/programmes/professional-and-certification-courses">Professional
+                                        and Certification Courses</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Schools & Institutes Section -->
+                        <div>
+                            <h3 class="font-bold text-green-800 mb-4">
+                                <a href="https://www.dkut.ac.ke/index.php/academics/schools-institutes">Schools &
+                                    Institutes</a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </li>
 
-        
-        <li class="nav-item font-bold mr-2">
-          <a href="./gallery.html">Gallery</a>
-        </li>
 
-        <li class="nav-item font-bold mr-2">
-          <a href="https://www.dkut.ac.ke/">University Website</a>
-        </li>
-      </ul>
+            <li class="nav-item font-bold mr-2">
+                <a href="{{ route('galleries.index') }}">Gallery</a>
+            </li>
+
+            <li class="nav-item font-bold mr-2">
+                <a href="{{ route('newsletter') }}">Newsletters</a>
+            </li>
+
+            <li class="nav-item font-bold mr-2">
+                <a href="https://www.dkut.ac.ke/">University Website</a>
+            </li>
+        </ul>
     </nav>
-
     <div
       class="hero bg-cover h-screen md:h-[650px] bg-center text-white text-center py-36 flex flex-col justify-center"
       style="
