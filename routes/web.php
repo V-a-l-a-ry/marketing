@@ -2,89 +2,80 @@
 
 use App\Http\Controllers\TwoFactorController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+
+use App\Http\Controllers\Auth\RegisterController;
 
 use App\Http\Controllers\NewsletterController;
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\EventController;
+use App\Models\Newsletter;
+
+// Route::prefix('admin')->group(function () {
+//     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
+//     Route::post('/login', [LoginController::class, 'login']);
+//     Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
+
+//     Route::middleware('auth:admin')->group(function () {
+//         Route::get('/dashboard', function () {
+//             return view('admin.dashboard'); // Create this dashboard view
+//         })->name('admin.dashboard');
+//     });
+// });
+
+
 // Home Route
-Route::get('/', function () {
-    return view('home');
-});
-
-// Authentication Routes
-Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('login', [AuthController::class, 'login']);
-Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
-Route::post('register', [AuthController::class, 'register']);
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-
-
-// Dashboard Route (only accessible after successful 2FA verification)
-
-
-use App\Http\Controllers\GalleryController;
-
-
-// Gallery Routes
-Route::middleware(['auth'])->group(function () {
-    // Display all galleries
-    Route::get('/galleries', [GalleryController::class, 'index'])->name('galleries.index');
-
-    // Show the gallery creation form
-    Route::get('/galleries/create', [GalleryController::class, 'create'])->name('galleries.create');
-
-    // Store a new gallery
-    Route::post('/galleries', [GalleryController::class, 'store'])->name('galleries.store');
-
-    // Show the gallery edit form
-    Route::get('/galleries/{gallery}/edit', [GalleryController::class, 'edit'])->name('galleries.edit');
-
-    // Update a gallery
-    Route::put('/galleries/{gallery}', [GalleryController::class, 'update'])->name('galleries.update');
-
-    // Delete a gallery
-    Route::delete('/galleries/{gallery}', [GalleryController::class, 'delete'])->name('galleries.delete');
+Route::middleware('auth')->get('/', function () {
+    return view('dashboard');
 });
 
 
 
-use App\Http\Controllers\PhotosController;
 
 
-// Photo Routes
-Route::middleware(['auth'])->group(function () {
-    // Show the gallery with images
-    Route::get('/gallery/{gallery}', [PhotosController::class, 'show'])->name('photos.show');
+Route::get('/newsletter/create', [NewsletterController::class, 'create'])->name('newsletter.create');
+Route::post('/newsletter/store', [NewsletterController::class, 'store'])->name('newsletters.store');
 
-    // Show a specific image from the gallery
-    Route::get('/gallery/{gallery}/photo/{photo}', [PhotosController::class, 'image'])->name('photos.image');
 
-    // Show the form to upload photos for a specific gallery
-    Route::get('/gallery/{gallery}/photos/create', [PhotosController::class, 'create'])->name('photos.create');
+Route::get('/event/create', [EventController::class, 'create'])->name('event.create');
+Route::post('/event/store', [EventController::class, 'store'])->name('event.store');
 
-    // Store newly uploaded photos in the specific gallery
-    Route::post('/gallery/{gallery}/photos', [PhotosController::class, 'store'])->name('photos.store');
 
-    // Show the form to edit a photo in a specific gallery
-    Route::get('/gallery/{gallery}/photos/{photo}/edit', [PhotosController::class, 'edit'])->name('photos.edit');
-
-    Route::delete('/gallery/{gallery}', [GalleryController::class, 'delete'])->name('gallery.destroy');
+Route::get('/users', function () {
+    return view('users');
 });
 
-// Newsletter Routes
-Route::middleware(['auth'])->group(function () {
-    // Show the form to create a new newsletter
-    Route::get('/newsletter/create', [NewsletterController::class, 'create'])->name('newsletter.create');
-
-    // Store a new newsletter
-    Route::post('/newsletter/store', [NewsletterController::class, 'store'])->name('newsletter.store');
-
-    // Display all newsletters
-    Route::get('/newsletters', [NewsletterController::class, 'showNewsletters'])->name('newsletters.index');
-
-    // Display the newsletters in a folder
-    Route::get('/newsletter', [NewsletterController::class, 'index'])->name('newsletter');
-
-    // Display a single newsletter article
-    Route::get('/newsletter/{id}', [NewsletterController::class, 'show'])->name('newsletter.show');
+Route::get('/library', function () {
+    return view('contentlibrary');
 });
+
+
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
+
+// Show the login form
+Route::get('/admin/login', [LoginController::class, 'show'])->name('login');
+
+// Handle login form submission
+Route::post('/admin/login', [LoginController::class, 'login']);
+
+// Handle logout
+Route::post('/admin/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+// Route::get('/event-upload', function () {
+//     return view('forms.event');
+// });
+
+// Route::get('/article-upload', function () {
+//     return view('forms.newsletter');
+// });
+
+
+
+Route::get('/events', [EventController::class, 'index'])->name('events.index');
+
+Route::get('/newsletters', [NewsletterController::class, 'index'])->name('newsletter.index');
+
+
+Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
