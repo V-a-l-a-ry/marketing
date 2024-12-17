@@ -144,8 +144,8 @@
 
     <!-- CTA section -->
     <div class="py-16 bg-green-800 text-white text-center bg-center bg-auto">
-        
-      <h2 class="text-6xl font-bold py-12">"Join the Circle of Visionaries — Where You Truly Belong."</h2>
+
+        <h2 class="text-6xl font-bold py-12">"Join the Circle of Visionaries — Where You Truly Belong."</h2>
         <p class="font-semibold text-xl pb-10">
             Join our community that is focused on the future of technology - today,
             tomorrow, and forever
@@ -362,69 +362,47 @@
     </section>
 
     <!-- Contact Section -->
-    <div class="shaodw-lg w-3/4 mx-auto mt-16 flex flex-wrap justify-center gap-8 p-6">
-        <!-- Contact Form -->
-        <div class="flex-1 min-w-[300px] bg-white p-6 w-5/6 shadow-md">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">
-                Feedback & Suggestions for the Marketing Team
+    <div class="mx-auto my-12 md:w-5/6 px-4 grid md:grid-cols-2 gap-6">
+        <!-- Contact Info -->
+        <div class="bg-green-700 text-white p-6 shadow">
+            <h2 class="text-2xl font-bold mb-4">
+                Reach us through our social media platforms:
             </h2>
+            <p class="mb-4">
+                <span class="font-bold">📞 Contact:</span> +254 713123021
+            </p>
+            <div class="flex justify-evenly space-x-4">
+                <a href="#" class="text-center">
+                    <img src="https://cdn-icons-png.flaticon.com/128/3955/3955024.png" alt="Instagram"
+                        class="w-12 h-12 border-2 border-white mb-2 transition-transform transform hover:scale-110" />
+                    <span>Instagram</span>
+                </a>
+                <a href="#" class="text-center">
+                    <img src="https://cdn-icons-png.flaticon.com/128/5968/5968830.png" alt="Twitter"
+                        class="w-12 h-12 border-2 border-white mb-2 transition-transform transform hover:scale-110" />
+                    <span>Twitter</span>
+                </a>
+                <a href="#" class="text-center">
+                    <img src="https://cdn-icons-png.flaticon.com/128/1051/1051309.png" alt="Facebook"
+                        class="w-12 h-12 border-2 border-white mb-2 transition-transform transform hover:scale-110" />
+                    <span>Facebook</span>
+                </a>
+            </div>
+        </div>
 
+        <!-- Contact Form -->
+        <div class="bg-white p-6 shadow">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Get in Touch</h2>
             <form action="mailto:marketing@dkut.ac.ke" method="post" class="space-y-4">
-                <!-- Subject of Feedback -->
-                <div>
-                    <label for="subject" class="block font-medium text-gray-700">What aspect of the marketing team
-                        would you like to comment
-                        on?</label>
-                    <select id="subject" name="subject" required
-                        class="w-full p-3 border focus:outline-none focus:ring focus:ring-green-300 bg-white text-gray-600">
-                        <option value="team_performance" class="hover:bg-green-200 p-3">Team Performance</option>
-                        <option value="campaign_effectiveness" class="hover:bg-green-200 p-3">
-                            Campaign Effectiveness
-                        </option>
-                        <option value="communication" class="hover:bg-green-200 p-3">Communication</option>
-                        <option value="creativity" class="hover:bg-green-200 p-3">Creativity</option>
-                        <option value="customer_engagement" class="hover:bg-green-200 p-3">Customer Engagement
-                        </option>
-                    </select>
-                </div>
-
-                <!-- Feedback Type -->
-                <div>
-                    <label for="feedback_type" class="block font-medium text-gray-700">What type of feedback would you
-                        like to share?</label>
-                    <select id="feedback_type" name="feedback_type" required
-                        class="w-full p-3 border focus:outline-none focus:ring focus:ring-green-300 bg-white text-gray-600">
-                        <option value="positive_feedback" class="hover:bg-green-200 p-3">Positive Feedback</option>
-                        <option value="constructive_criticism" class="hover:bg-green-200 p-3">
-                            Constructive Criticism
-                        </option>
-                        <option value="suggestions_for_improvement" class="hover:bg-green-200 p-3">
-                            Suggestions for Improvement
-                        </option>
-                    </select>
-                </div>
-
-                <!-- Feedback Message -->
-                <div>
-                    <label for="feedback_message" class="block font-medium text-gray-700">Your feedback</label>
-                    <textarea id="feedback_message" name="feedback_message" rows="5" required
-                        placeholder="Type your message here..."
-                        class="w-full p-3 border focus:outline-none focus:ring focus:ring-green-300"></textarea>
-                </div>
-
-                <!-- Submit Button -->
-                <div>
-                    <button type="submit"
-                        class="bg-green-700 text-white py-2 px-6 hover:bg-green-600 transition-colors">
-                        Send
-                    </button>
-                </div>
-
-                <!-- Tagline -->
-                <p class="text font-semibold my-4 text-center text-green-800">
-                    Your honest thoughts—both praise and constructive criticism—help us
-                    grow and improve.
-                </p>
+                <input type="text" placeholder="Your Name" required
+                    class="w-full border border-gray-300 px-4 py-2 focus:ring focus:ring-green-400" />
+                <input type="email" placeholder="Your Email" required
+                    class="w-full border border-gray-300 px-4 py-2 focus:ring focus:ring-green-400" />
+                <textarea placeholder="Type your message here..." rows="5" required
+                    class="w-full border border-gray-300 px-4 py-2 focus:ring focus:ring-green-400"></textarea>
+                <button type="submit" class="w-full bg-green-700 text-white py-2 hover:bg-green-800 transition">
+                    Send
+                </button>
             </form>
         </div>
     </div>
