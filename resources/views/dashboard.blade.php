@@ -76,14 +76,16 @@
                             <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-400"></span>
                         </button>
                         <div class="flex items-center space-x-3">
-                            {{-- <img src="https://creatie.ai/ai/api/search-image?query=A professional headshot of a university administrator with a warm smile, wearing business attire, against a neutral background&width=40&height=40&orientation=squarish&flag=9a04c394-24e2-4c81-aa5a-8df8c2020438"
-                                alt="Profile" class="h-8 w-8 rounded-full"> --}}
+                            <!-- Profile Image -->
+                            <img src="{{ Auth::user()->profile_image ?? 'https://via.placeholder.com/150' }}"
+                                alt="Profile" class="h-8 w-8 rounded-full">
                             <!-- Display the name of the logged-in user -->
-                            {{-- <span class="text-sm font-medium text-gray-700">{{ Auth::user()->name }}</span> --}}
+                            <span class="text-sm font-medium text-gray-700">{{ Auth::user()->name }}</span>
                         </div>
                     </div>
                 </div>
             </header>
+
 
 
             <main class="flex-1 overflow-y-auto p-8">
@@ -163,6 +165,10 @@
 
                         <div class="bg-white rounded-lg shadow p-6">
                             <h3 class="text-lg font-medium text-gray-900">Upcoming Events</h3>
+                            <a href="{{ route('events.index') }}"
+                            class="!rounded-button text-sm font-medium text-custom hover:text-custom-600">
+                            View All
+                        </a>
                             <div class="mt-4 space-y-4">
                                 @if ($events->isEmpty())
                                     <p>No upcoming events at the moment.</p>
@@ -208,18 +214,15 @@
                                 </a>
                             </div>
                             <div class="space-y-4">
-                                @forelse ($recentNewsletters as $newsletter)
+                                @forelse ($recentNewsletters->sortByDesc('send_date')->take(4) as $newsletter)
                                     <div class="flex items-center">
                                         <div class="flex-1">
-                                            <h4 class="text-sm font-medium text-gray-900">{{ $newsletter->title }}
-                                            </h4>
+                                            <h4 class="text-sm font-medium text-gray-900">{{ $newsletter->title }}</h4>
                                             <p class="text-sm text-gray-500">
-                                                Sent on
-                                                {{ \Carbon\Carbon::parse($newsletter->send_date)->format('M d, Y') }}
+                                                Sent on {{ \Carbon\Carbon::parse($newsletter->send_date)->format('M d, Y') }}
                                             </p>
                                         </div>
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                             {{ $newsletter->opens ?? 0 }}% Open Rate
                                         </span>
                                     </div>
@@ -227,6 +230,7 @@
                                     <p class="text-sm text-gray-500">No newsletters available.</p>
                                 @endforelse
                             </div>
+                            
                         </div>
 
                         <div class="bg-white rounded-lg shadow p-6">
@@ -280,11 +284,14 @@
                                     </button>
                                 </form>
 
-                                <button
-                                    class="!rounded-button w-full flex items-center justify-center px-4 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">
-                                    <i class="fas fa-chart-bar mr-2"></i>
-                                    Generate Report
-                                </button>
+                                <a href="{{ route('galleries.index') }}">
+                                    <button
+                                        class="!rounded-button w-full flex items-center justify-center px-4 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">
+                                        <i class="fas fa-chart-bar mr-2"></i>
+                                        Check Galleries
+                                    </button>
+                                </a>
+
                             </div>
                         </div>
                     </section>

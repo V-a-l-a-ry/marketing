@@ -12,10 +12,11 @@ class Newsletter extends Model
     protected $fillable = [
         'title',
         'category_id',
-        'status',
         'send_date',
-        'opens'
+        'opens',
     ];
 
-   
-} // End of Newsletter model
+    protected $casts = [
+        'send_date' => 'datetime', // Automatically cast send_date to a Carbon object
+    ];
+}

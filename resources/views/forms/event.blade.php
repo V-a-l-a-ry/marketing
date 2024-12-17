@@ -50,7 +50,7 @@
                                 class="block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom sm:text-sm">
                                 <option value="" disabled selected>Select an event type</option>
                                 <option value="Workshop">Workshop</option>
-                                <option value="Conference">Conference</option>
+                                <option value="Conference">Mentorships</option>
                                 <option value="Webinar">Webinar</option>
                                 <option value="Seminar">Seminar</option>
                                 <option value="Networking">Networking</option>

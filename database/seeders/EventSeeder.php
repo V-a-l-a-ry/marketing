@@ -1,31 +1,36 @@
 <?php
+// database/seeders/EventSeeder.php
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Event;
 
 class EventSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         Event::create([
-            'name' => 'Annual Tech Conference 2024',
+            'name' => 'Tech Conference 2024',
             'type' => 'Conference',
-            'location' => 'Main Campus',
-            'date' => '2024-03-15',
-            'attendees' => 250,
+            'location' => 'New York',
+            'date' => now()->addDays(15),
+            'attendees' => 120
         ]);
 
         Event::create([
-            'name' => 'Digital Marketing Workshop',
+            'name' => 'Web Development Workshop',
             'type' => 'Workshop',
-            'location' => 'Business School',
-            'date' => '2024-04-05',
-            'attendees' => 75,
+            'location' => 'London',
+            'date' => now()->addDays(10),
+            'attendees' => 50
+        ]);
+
+        Event::create([
+            'name' => 'AI Summit 2024',
+            'type' => 'Conference',
+            'location' => 'San Francisco',
+            'date' => now()->addDays(30),
+            'attendees' => 200
         ]);
     }
 }
