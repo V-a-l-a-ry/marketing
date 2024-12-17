@@ -112,7 +112,7 @@
 
         <!-- Footer -->
         <div class="mt-8 text-center text-sm text-gray-600">
-            <p>Don't have an account? <a href="#" class="font-medium text-custom hover:text-custom/90">Sign up</a>
+            <p>Don't have an account? <a href="/register" class="font-medium text-custom hover:text-custom/90">Sign up</a>
             </p>
         </div>
 
