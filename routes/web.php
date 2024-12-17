@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\TwoFactorController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisterController;
 
+
 use App\Http\Controllers\NewsletterController;
+
+use App\Http\Controllers\DashboardController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EventController;
@@ -25,9 +28,9 @@ use App\Models\Newsletter;
 
 
 // Home Route
-Route::middleware('auth')->get('/', function () {
-    return view('dashboard');
-});
+
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
 
 
 
@@ -41,9 +44,9 @@ Route::get('/event/create', [EventController::class, 'create'])->name('event.cre
 Route::post('/event/store', [EventController::class, 'store'])->name('event.store');
 
 
-Route::get('/users', function () {
-    return view('users');
-});
+
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
 Route::get('/library', function () {
     return view('contentlibrary');
