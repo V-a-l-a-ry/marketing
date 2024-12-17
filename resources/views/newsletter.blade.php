@@ -95,11 +95,6 @@
                                             <option>News</option>
                                             <option>Updates</option>
                                             <option>Announcements</option>
-                                        </select><select class="border rounded-lg px-4 py-2">
-                                            <option>All Status</option>
-                                            <option>Draft</option>
-                                            <option>Scheduled</option>
-                                            <option>Sent</option>
                                         </select></div>
                                 </div>
                                 <div class="overflow-x-auto">
@@ -121,9 +116,7 @@
                                                     <th
                                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         Category</th>
-                                                    <th
-                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Status</th>
+                                                   
                                                     <th
                                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         Send Date</th>
@@ -156,9 +149,7 @@
                                                                 {{ $newsletter->category->name ?? 'Uncategorized' }}
                                                             </span>
                                                         </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            {{ $newsletter->status }}
-                                                        </td>
+                                                       
                                                         <td class="px-6 py-4 whitespace-nowrap">
                                                             <span
                                                                 class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -170,8 +161,8 @@
                                                         </td>
                                                         <td
                                                             class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                            <a href="{{ route('newsletters.edit', $newsletter->id) }}"
-                                                                class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
+                                                            {{-- <a href="{{ route('newsletters.edit', $newsletter->id) }}"
+                                                                class="text-blue-600 hover:text-blue-900 mr-3">Edit</a> --}}
                                                             <form
                                                                 action="{{ route('newsletters.destroy', $newsletter->id) }}"
                                                                 method="POST" class="inline">

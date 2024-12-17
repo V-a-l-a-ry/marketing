@@ -66,7 +66,7 @@
                             <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-400"></span>
                         </button>
                         <div class="flex items-center space-x-3">
-                            <img src="https://creatie.ai/ai/api/search-image?query=A professional headshot of a university administrator with a warm smile, wearing business attire, against a neutral background&width=40&height=40&orientation=squarish&flag=9a04c394-24e2-4c81-aa5a-8df8c2020438&flag=73b6a891-3194-4712-9e67-2b2d32ee5ba7&flag=4e33065b-7593-499d-b627-479c6d45817d&flag=cbb72519-b1a0-46ff-824c-115008a57503&flag=4a5bc669-274b-492c-a4cf-aaf6bb6f28ba&flag=2bc0094a-ef19-44b1-8252-9ce6feb6636f"
+                            <img src="https://creatie.ai/ai/api/search-image?query=A professional headshot of a university administrator with a warm smile, wearing business attire, against a neutral background&width=40&height=40&orientation=squarish&flag=9a04c394-24e2-4c81-aa5a-8df8c2020438&flag=73b6a891-3194-4712-9e67-2b2d32ee5ba7&flag=4e33065b-7593-499d-b627-479c6d45817d&flag=cbb72519-b1a0-46ff-824c-115008a57503&flag=4a5bc669-274b-492c-a4cf-aaf6bb6f28ba&flag=2bc0094a-ef19-44b1-8252-9ce6feb6636f&flag=a31402a4-d736-4a42-9b08-ba9d299c5e05"
                                 alt="Profile" class="h-8 w-8 rounded-full" />
                             <span class="text-sm font-medium text-gray-700">John Anderson</span>
                         </div>
@@ -79,7 +79,9 @@
                     <div class="grid grid-cols-1 gap-8">
                         <section class="bg-white rounded-lg shadow">
                             <div class="flex items-center justify-between p-6 border-b">
-                                <h3 class="text-lg font-medium text-gray-900">Content Library</h3>
+                                <h3 class="text-lg font-medium text-gray-900">Content Library</h3><button
+                                    class="!rounded-button px-4 py-2 bg-custom text-white hover:bg-custom-600"><i
+                                        class="fas fa-plus mr-2"></i>Add New Content</button>
                             </div>
                             <div class="p-6">
                                 <div class="flex items-center justify-between mb-4">
@@ -93,64 +95,64 @@
                                             <option>Documents</option>
                                         </select></div>
                                 </div>
+                                <!-- Gallery Grid -->
                                 <div class="overflow-x-auto">
-                                    <table class="min-w-full divide-y divide-gray-200">
-                                        <thead class="bg-gray-50">
-                                            <tr>
-                                                <th
-                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Content Title
-                                                </th>
-                                                <th
-                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Type
-                                                </th>
-                                               
-                                                <th
-                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Send Date
-                                                </th>
-                                                <th
-                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Opens
-                                                </th>
+                                    <div class="grid grid-cols-4 gap-6">
+                                        @foreach ($galleries as $gallery)
+                                            <div class="relative group">
+                                                <!-- Dynamic Image Placeholder -->
+                                                <img src="{{ asset('storage/' . $gallery->media_url) }}"
+                                                    class="w-full h-48 object-cover rounded-lg"
+                                                    alt="{{ $gallery->title }}" />
 
-                                            </tr>
-                                        </thead>
-                                        <tbody class="bg-white divide-y divide-gray-200">
-                                            @foreach ($contents as $content)
-                                                <tr>
-                                                    <td class="px-6 py-4 whitespace-nowrap">{{ $content->title }}</td>
+                                                <!-- Hover Actions -->
+                                                <div
+                                                    class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center space-x-3">
+                                                    <a href="{{ route('galleries.index', $gallery->id) }}"
+                                                        class="p-2 bg-white rounded-full text-gray-800 hover:bg-gray-100">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    {{-- <a href="{{ route('galleries.edit', $gallery->id) }}"
+                                                        class="p-2 bg-white rounded-full text-gray-800 hover:bg-gray-100">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a> --}}
+                                                    <form method="POST"
+                                                        action="{{ route('galleries.destroy', $gallery->id) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            class="p-2 bg-white rounded-full text-red-600 hover:bg-gray-100">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
 
-                                                    <!-- Type -->
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        @if ($content instanceof \App\Models\Gallery)
-                                                            {{ ucfirst($content->type) }}
-                                                        @elseif ($content instanceof \App\Models\Newsletter)
-                                                            {{ 'Newsletter' }}
-                                                        @endif
-                                                    </td>
-
-                                                   
-
-                                                    <!-- Send Date -->
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        {{ $content->send_date ? $content->send_date->format('M d, Y') : '-' }}
-                                                    </td>
-
-                                                    <!-- Opens -->
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        {{ $content->opens ?? '-' }}
-                                                    </td>
-
-
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-
-
+                                                <!-- Item Details -->
+                                                <div class="mt-2">
+                                                    <h4 class="font-medium text-gray-900">{{ $gallery->title }}</h4>
+                                                    <p class="text-sm text-gray-500">
+                                                        {{ $gallery->send_date ?? 'No Date' }}
+                                                    </p>
+                                                    <span
+                                                        class="inline-block mt-1 px-2 py-1 text-xs font-semibold rounded-full 
+                                                        {{ $gallery->type == 'newsletter' ? 'bg-purple-100 text-purple-800' : '' }}
+                                                        {{ $gallery->type == 'video' ? 'bg-gray-100 text-gray-800' : '' }}
+                                                        {{ $gallery->type == 'document' ? 'bg-pink-100 text-pink-800' : '' }}
+                                                        {{ $gallery->type == 'image' ? 'bg-blue-100 text-blue-800' : '' }}">
+                                                        {{ ucfirst($gallery->type) }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
+
+
+                                <!-- No Data Message -->
+                                @if ($galleries->isEmpty())
+                                    <p class="text-center text-gray-500 mt-6">No gallery items available yet.</p>
+                                @endif
+
                                 <div class="mt-4 flex items-center justify-between">
                                     <div class="text-sm text-gray-700">Showing 1 to 3 of 15 results</div>
                                     <div class="flex space-x-2"><button
@@ -227,6 +229,7 @@
             engagementChart.resize();
         });
     </script>
+
 
 
 

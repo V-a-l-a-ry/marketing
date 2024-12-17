@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -20,19 +22,32 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        // Retrieve the credentials from the request
+        // Retrieve the credentials
         $credentials = $request->only('email', 'password');
 
-        // Attempt to log in with the provided credentials
-        if (Auth::attempt($credentials, $request->filled('remember'))) {
-            $request->session()->regenerate(); // Regenerate session for security
-            return redirect()->intended('/dashboard'); // Adjust the redirect as per your requirement
+        // Check if the user exists
+        $user = User::where('email', $credentials['email'])->first();
+
+        // Check if user exists but is inactive
+        if ($user && $user->status !== 'Active') {
+            return back()->withErrors([
+                'email' => 'Your account is not active. Please contact the administrator.',
+            ])->withInput();
         }
 
-        // If authentication fails, return back with an error
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->withInput();
+        // Attempt to log in the user
+        if (!Auth::attempt($credentials, $request->filled('remember'))) {
+            return back()->withErrors([
+                'email' => 'The provided credentials are incorrect. Please try again.',
+            ])->withInput();
+        }
+
+        // Update the last active time after successful login
+        $user->update(['last_active' => now()]);
+
+        // Regenerate session and redirect to dashboard
+        $request->session()->regenerate();
+        return redirect()->intended('/'); // Redirect to a dashboard page
     }
 
     public function logout(Request $request)
@@ -42,7 +57,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login'); // Redirect to the login page
+        return redirect('/login');
     }
 }
-

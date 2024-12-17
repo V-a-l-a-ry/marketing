@@ -26,7 +26,6 @@ class NewsletterController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'category_id' => 'required|integer',
-            'status' => 'required|string',
             'send_date' => 'nullable|date',
             'opens' => 'nullable|integer|min:0',
         ]);
