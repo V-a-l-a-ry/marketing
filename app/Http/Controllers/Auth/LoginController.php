@@ -2,10 +2,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -25,23 +23,26 @@ class LoginController extends Controller
         // Retrieve the credentials from the request
         $credentials = $request->only('email', 'password');
 
-        // Use the default guard unless 'admin' is required
-        if (Auth::attempt($credentials, $request->remember)) {
-            return redirect()->intended('/'); // Adjust the redirect as per your requirement
+        // Attempt to log in with the provided credentials
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
+            $request->session()->regenerate(); // Regenerate session for security
+            return redirect()->intended('/dashboard'); // Adjust the redirect as per your requirement
         }
 
-        // If authentication fails, return back with error
+        // If authentication fails, return back with an error
         return back()->withErrors([
-            'email' => 'Invalid email or password.',
+            'email' => 'The provided credentials do not match our records.',
         ])->withInput();
     }
 
     public function logout(Request $request)
     {
-        Auth::logout(); // Use the default guard for logout
+        Auth::logout();
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/admin/login'); // Adjust the redirect for your login route
+        return redirect('/login'); // Redirect to the login page
     }
 }
+

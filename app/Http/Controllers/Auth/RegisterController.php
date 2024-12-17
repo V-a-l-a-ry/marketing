@@ -17,21 +17,37 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        // Validate the incoming request data
-        $validated = $request->validate([
-            'fullname' => 'required|string|max:255',
+        // Validate the input
+        $request->validate([
+            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'department' => 'nullable|string',
+            'profile_image' => 'nullable|image|max:2048',
         ]);
-
+    
+        // Determine role based on user count
+        $role = User::count() < 2 ? 'admin' : 'editor';
+    
+        // Handle profile image upload if provided
+        $profileImagePath = null;
+        if ($request->hasFile('profile_image')) {
+            $profileImagePath = $request->file('profile_image')->store('profile_images', 'public');
+        }
+    
         // Create the user
         User::create([
-            'fullname' => $validated['fullname'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $role,
+            'department' => $request->department,
+            'profile_image' => $profileImagePath,
+            'status' => 'Active',
+            'last_active' => now(),
         ]);
-
-        // Redirect to a specific route after successful registration
-        return redirect()->route('login')->with('success', 'Account created successfully!');
+    
+        return redirect()->route('login')->with('success', 'Registration successful. Please log in.');
     }
+    
 }

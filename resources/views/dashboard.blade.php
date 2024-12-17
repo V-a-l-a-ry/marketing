@@ -79,7 +79,7 @@
                             {{-- <img src="https://creatie.ai/ai/api/search-image?query=A professional headshot of a university administrator with a warm smile, wearing business attire, against a neutral background&width=40&height=40&orientation=squarish&flag=9a04c394-24e2-4c81-aa5a-8df8c2020438"
                                 alt="Profile" class="h-8 w-8 rounded-full"> --}}
                             <!-- Display the name of the logged-in user -->
-                            <span class="text-sm font-medium text-gray-700">{{ Auth::user()->name }}</span>
+                            {{-- <span class="text-sm font-medium text-gray-700">{{ Auth::user()->name }}</span> --}}
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                             <div class="flex items-center">
                                 <div class="flex-1">
                                     <h3 class="text-sm font-medium text-gray-500">Total Subscribers</h3>
-                                    <p class="text-2xl font-semibold text-gray-900 mt-1">24,892</p>
+                                    <p class="text-2xl font-semibold text-gray-900 mt-1">{{ $totalSubscribers }}</p>
                                 </div>
                                 <div class="w-12 h-12 bg-custom/10 rounded-full flex items-center justify-center">
                                     <i class="fas fa-users text-custom text-xl"></i>
@@ -109,7 +109,7 @@
                             <div class="flex items-center">
                                 <div class="flex-1">
                                     <h3 class="text-sm font-medium text-gray-500">Active Events</h3>
-                                    <p class="text-2xl font-semibold text-gray-900 mt-1">12</p>
+                                    <p class="text-2xl font-semibold text-gray-900 mt-1">{{ $activeEvents }}</p>
                                 </div>
                                 <div class="w-12 h-12 bg-custom/10 rounded-full flex items-center justify-center">
                                     <i class="fas fa-calendar text-custom text-xl"></i>
@@ -125,7 +125,8 @@
                             <div class="flex items-center">
                                 <div class="flex-1">
                                     <h3 class="text-sm font-medium text-gray-500">Newsletter Opens</h3>
-                                    <p class="text-2xl font-semibold text-gray-900 mt-1">68.7%</p>
+                                    <p class="text-2xl font-semibold text-gray-900 mt-1">{{ $averageOpensFormatted }}
+                                    </p>
                                 </div>
                                 <div class="w-12 h-12 bg-custom/10 rounded-full flex items-center justify-center">
                                     <i class="fas fa-envelope-open text-custom text-xl"></i>
@@ -141,7 +142,7 @@
                             <div class="flex items-center">
                                 <div class="flex-1">
                                     <h3 class="text-sm font-medium text-gray-500">Content Pieces</h3>
-                                    <p class="text-2xl font-semibold text-gray-900 mt-1">1,284</p>
+                                    <p class="text-2xl font-semibold text-gray-900 mt-1">totalContentPieces</p>
                                 </div>
                                 <div class="w-12 h-12 bg-custom/10 rounded-full flex items-center justify-center">
                                     <i class="fas fa-file-alt text-custom text-xl"></i>
@@ -163,103 +164,73 @@
                         <div class="bg-white rounded-lg shadow p-6">
                             <h3 class="text-lg font-medium text-gray-900">Upcoming Events</h3>
                             <div class="mt-4 space-y-4">
-                                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
-                                    <div class="flex-shrink-0 w-10 text-center">
-                                        <p class="text-sm font-semibold text-custom">MAR</p>
-                                        <p class="text-2xl font-bold text-gray-900">15</p>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h4 class="text-sm font-medium text-gray-900">Spring Campus Tour</h4>
-                                        <p class="text-sm text-gray-500">9:00 AM - 2:00 PM</p>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            128 Registered
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
-                                    <div class="flex-shrink-0 w-10 text-center">
-                                        <p class="text-sm font-semibold text-custom">MAR</p>
-                                        <p class="text-2xl font-bold text-gray-900">18</p>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h4 class="text-sm font-medium text-gray-900">Alumni Networking Event</h4>
-                                        <p class="text-sm text-gray-500">6:00 PM - 9:00 PM</p>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            85 Registered
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
-                                    <div class="flex-shrink-0 w-10 text-center">
-                                        <p class="text-sm font-semibold text-custom">MAR</p>
-                                        <p class="text-2xl font-bold text-gray-900">22</p>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h4 class="text-sm font-medium text-gray-900">Research Symposium</h4>
-                                        <p class="text-sm text-gray-500">10:00 AM - 4:00 PM</p>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            156 Registered
-                                        </span>
-                                    </div>
-                                </div>
+                                @if ($events->isEmpty())
+                                    <p>No upcoming events at the moment.</p>
+                                @else
+                                    @foreach ($events->sortByDesc('date')->take(4) as $event)
+                                        <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                                            <div class="flex-shrink-0 w-10 text-center">
+                                                <p class="text-sm font-semibold text-custom">
+                                                    {{ \Carbon\Carbon::parse($event->date)->format('M') }}
+                                                </p>
+                                                <p class="text-2xl font-bold text-gray-900">
+                                                    {{ \Carbon\Carbon::parse($event->date)->format('d') }}
+                                                </p>
+                                            </div>
+                                            <div class="ml-4">
+                                                <h4 class="text-sm font-medium text-gray-900">{{ $event->name }}</h4>
+                                                <p class="text-sm text-gray-500">
+                                                    {{ \Carbon\Carbon::parse($event->date)->format('g:i A') }} -
+                                                    {{ \Carbon\Carbon::parse($event->end_time ?? $event->date)->format('g:i A') }}
+                                                </p>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <span
+                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                    {{ $event->attendees }} Registered
+                                                </span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
+
                     </section>
 
                     <section class="grid grid-cols-3 gap-6">
                         <div class="bg-white rounded-lg shadow p-6">
                             <div class="flex items-center justify-between mb-4">
                                 <h3 class="text-lg font-medium text-gray-900">Recent Newsletters</h3>
-                                <button
-                                    class="!rounded-button text-sm font-medium text-custom hover:text-custom-600">View
-                                    All</button>
+                                <a href="{{ route('newsletter.index') }}"
+                                    class="!rounded-button text-sm font-medium text-custom hover:text-custom-600">
+                                    View All
+                                </a>
                             </div>
                             <div class="space-y-4">
-                                <div class="flex items-center">
-                                    <div class="flex-1">
-                                        <h4 class="text-sm font-medium text-gray-900">March Campus Update</h4>
-                                        <p class="text-sm text-gray-500">Sent on Mar 10, 2024</p>
+                                @forelse ($recentNewsletters as $newsletter)
+                                    <div class="flex items-center">
+                                        <div class="flex-1">
+                                            <h4 class="text-sm font-medium text-gray-900">{{ $newsletter->title }}
+                                            </h4>
+                                            <p class="text-sm text-gray-500">
+                                                Sent on
+                                                {{ \Carbon\Carbon::parse($newsletter->send_date)->format('M d, Y') }}
+                                            </p>
+                                        </div>
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            {{ $newsletter->opens ?? 0 }}% Open Rate
+                                        </span>
                                     </div>
-                                    <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                        72% Open Rate
-                                    </span>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="flex-1">
-                                        <h4 class="text-sm font-medium text-gray-900">Research Highlights</h4>
-                                        <p class="text-sm text-gray-500">Sent on Mar 5, 2024</p>
-                                    </div>
-                                    <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                        68% Open Rate
-                                    </span>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="flex-1">
-                                        <h4 class="text-sm font-medium text-gray-900">Alumni Success Stories</h4>
-                                        <p class="text-sm text-gray-500">Sent on Mar 1, 2024</p>
-                                    </div>
-                                    <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                        75% Open Rate
-                                    </span>
-                                </div>
+                                @empty
+                                    <p class="text-sm text-gray-500">No newsletters available.</p>
+                                @endforelse
                             </div>
                         </div>
 
                         <div class="bg-white rounded-lg shadow p-6">
+                            <!-- Recent Media Content -->
                             <div class="flex items-center justify-between mb-4">
                                 <h3 class="text-lg font-medium text-gray-900">Recent Media</h3>
                                 <button
@@ -283,6 +254,7 @@
                         </div>
 
                         <div class="bg-white rounded-lg shadow p-6">
+                            <!-- Quick Actions Content -->
                             <div class="flex items-center justify-between mb-4">
                                 <h3 class="text-lg font-medium text-gray-900">Quick Actions</h3>
                             </div>
@@ -298,11 +270,16 @@
                                     </button>
                                 </form>
 
-                                <button
-                                    class="!rounded-button w-full flex items-center justify-center px-4 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">
-                                    <i class="fas fa-calendar-plus mr-2"></i>
-                                    Schedule Event
-                                </button>
+                                <form action="{{ route('event.create') }}">
+                                    @csrf
+
+                                    <button
+                                        class="!rounded-button w-full flex items-center justify-center px-4 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">
+                                        <i class="fas fa-calendar-plus mr-2"></i>
+                                        Schedule Event
+                                    </button>
+                                </form>
+
                                 <button
                                     class="!rounded-button w-full flex items-center justify-center px-4 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">
                                     <i class="fas fa-chart-bar mr-2"></i>
@@ -311,6 +288,8 @@
                             </div>
                         </div>
                     </section>
+
+
                 </div>
             </main>
         </div>

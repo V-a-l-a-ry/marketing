@@ -9,10 +9,14 @@ return new class extends Migration {
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('fullname');
+            $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->rememberToken();
+            $table->string('role')->default('user');
+            $table->string('department')->nullable();
+            $table->string('status')->default('Active');
+            $table->timestamp('last_active')->nullable();
+            $table->string('profile_image')->nullable();
             $table->timestamps();
         });
     }
