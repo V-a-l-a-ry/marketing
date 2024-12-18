@@ -72,7 +72,7 @@ class NewsletterController extends Controller
     {
         $newsletter->delete();
 
-        return redirect()->route('newsletter')
+        return redirect()->route('newsletter.index')
                          ->with('success', 'Newsletter deleted successfully.');
     }
 }

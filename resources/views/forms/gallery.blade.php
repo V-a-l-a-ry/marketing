@@ -5,7 +5,7 @@
             <div class="sm:mx-auto sm:w-full sm:max-w-md">
                 <img class="mx-auto h-12 w-auto" src="https://ai-public.creatie.ai/gen_page/logo_placeholder.png"
                     alt="Logo" />
-                <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Submit Newsletter Article
+                <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">New Gallery
                 </h2>
                 <p class="mt-2 text-center text-sm text-gray-600">Share your article with our subscribers</p>
             </div>

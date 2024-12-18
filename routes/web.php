@@ -18,8 +18,8 @@ use App\Models\Newsletter;
 
 // Redirect '/' to login page if user is not authenticated
 Route::get('/', function () {
-    return Auth::check() 
-        ? redirect()->route('admin.dashboard') 
+    return Auth::check()
+        ? redirect()->route('admin.dashboard')
         : redirect()->route('login');
 })->name('home');
 
@@ -46,14 +46,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/newsletter/create', [NewsletterController::class, 'create'])->name('newsletter.create');
     Route::post('/newsletter/store', [NewsletterController::class, 'store'])->name('newsletters.store');
     Route::delete('/newsletters/{id}', [NewsletterController::class, 'destroy'])->name('newsletters.destroy');
-    
+
 
     // Event Routes
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/event/create', [EventController::class, 'create'])->name('event.create');
     Route::post('/event/store', [EventController::class, 'store'])->name('event.store');
     Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
-    
+
 
     // User Management
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
@@ -75,4 +75,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 // ------------------------------
 Route::fallback(function () {
     return view('errors.404');
+});
+
+Route::get('/home', function () {
+    return view('frontend.home');
 });
