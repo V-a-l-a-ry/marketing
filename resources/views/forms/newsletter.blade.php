@@ -50,6 +50,16 @@
                             @enderror
                         </div>
 
+                        <!-- Content -->
+                        <div>
+                            <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
+                            <textarea id="content" name="content" rows="5" required
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom sm:text-sm"
+                                placeholder="Write your newsletter content here...">{{ old('content') }}</textarea>
+                            @error('content')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
 
                         <!-- Send Date -->
                         <div>
@@ -88,8 +98,6 @@
                             </button>
                         </div>
                     </form>
-
-
                 </div>
             </div>
 

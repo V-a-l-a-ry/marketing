@@ -9,8 +9,9 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\ExhibitController;
 use App\Http\Controllers\GalleryController;
-use App\Models\Newsletter;
+use App\Http\Controllers\ArticleController;
 
 // ------------------------------
 // Public Routes
@@ -67,7 +68,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/galleries', [GalleryController::class, 'index'])->name('galleries.index');
     Route::get('/galleries/create', [GalleryController::class, 'create'])->name('galleries.create');
     Route::post('/galleries', [GalleryController::class, 'store'])->name('galleries.store');
+    Route::get('/admin/galleries/{id}', [GalleryController::class, 'show'])->name('galleries.show');
     Route::delete('/galleries/{id}', [GalleryController::class, 'destroy'])->name('galleries.destroy');
+    Route::post('galleries/{gallery}/images', [GalleryController::class, 'uploadImages'])->name('galleries.uploadImages');
 });
 
 // ------------------------------
@@ -80,3 +83,15 @@ Route::fallback(function () {
 Route::get('/home', function () {
     return view('frontend.home');
 });
+
+
+
+// Routes for the ExhibitController
+Route::get('/exhibits', [ExhibitController::class, 'index'])->name('exhibits.index');
+Route::get('/exhibits/{gallery}', [ExhibitController::class, 'show'])->name('exhibits.show');
+
+
+
+
+Route::get('/newsletters', [ArticleController::class, 'index'])->name('newsletters.index');
+Route::get('/newsletters/{newsletter}', [ArticleController::class, 'show'])->name('newsletters.show');

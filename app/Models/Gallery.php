@@ -17,7 +17,6 @@ class Gallery extends Model
         'title',      // Gallery Title
         'type',       // Media Type (image, video, document)
         'media_url',  // File Path for Media (e.g., image path)
-            // Status (Draft, Scheduled, Sent)
         'send_date',  // Send Date (optional)
         'opens',      // Number of opens (optional)
     ];
@@ -25,7 +24,6 @@ class Gallery extends Model
     // Accessor to get full URL of media_url field
     public function getMediaUrlAttribute($value)
     {
-        // Assuming files are stored in public storage and accessible via public/storage
         return asset('storage/' . $value);
     }
 
@@ -38,12 +36,18 @@ class Gallery extends Model
     // Accessor for formatted status (optional)
     public function getFormattedStatusAttribute()
     {
-        return ucfirst($this->status);  // Capitalize the first letter of status
+        return ucfirst($this->status);
     }
 
     // Scope for filtering by media type (optional)
     public function scopeOfType($query, $type)
     {
         return $query->where('type', $type);
+    }
+
+    // Relationship to the Image model
+    public function images()
+    {
+        return $this->hasMany(Image::class);
     }
 }

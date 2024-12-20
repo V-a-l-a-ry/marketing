@@ -13,11 +13,12 @@
             </button>
             <div class="flex items-center space-x-3">
                 <!-- Profile Image -->
-                <img src="{{ Auth::user()->profile_image ?? 'https://via.placeholder.com/150' }}"
-                    alt="Profile" class="h-8 w-8 rounded-full">
+                <img src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://via.placeholder.com/150' }}"
+                     alt="Profile" class="h-8 w-8 rounded-full">
                 <!-- Display the name of the logged-in user -->
                 <span class="text-sm font-medium text-gray-700">{{ Auth::user()->name }}</span>
             </div>
+            
         </div>
     </div>
 </header>
