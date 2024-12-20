@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->foreignId('category_id');
-            $table->enum('status', ['Draft', 'Scheduled', 'Sent'])->default('Draft');
+            $table->text('content')->nullable()->after('title');
             $table->date('send_date')->nullable();
             $table->integer('opens')->default(0);
             $table->timestamps();
