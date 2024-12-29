@@ -12,7 +12,7 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ExhibitController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ArticleController;
-
+use App\Http\Controllers\InfohubController;
 // ------------------------------
 // Public Routes
 // ------------------------------
@@ -84,6 +84,7 @@ Route::get('/home', function () {
     return view('frontend.home');
 });
 
+Route::get('/infohub', [InfohubController::class, 'index'])->name('infohub');
 
 
 // Routes for the ExhibitController

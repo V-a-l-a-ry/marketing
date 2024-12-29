@@ -14,6 +14,8 @@
     </script>
     <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#000000"
         data-border-radius="small"></script>
+
+    @vite('resources/css/app.css')
 </head>
 
 <body class="bg-gray-50 font-sans">
@@ -28,7 +30,7 @@
             </div>
         </div>
     </div>
-
+    @vite('resources/js/app.js')
     <script>
         const engagementChart = echarts.init(document.getElementById('engagementChart'));
 

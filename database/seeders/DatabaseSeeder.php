@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
             EventSeeder::class,
            // SubscriberSeeder::class,
             GallerySeeder::class,
+            NewsSeeder::class,
+            NoticeSeeder::class,
         ]);
     }
 }
-

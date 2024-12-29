@@ -1,78 +1,9 @@
 <x-layout>
     <main class="flex-1 overflow-y-auto p-8">
         <div class="grid grid-cols-1 gap-8">
-            <section class="grid grid-cols-4 gap-6">
-                <div class="bg-white rounded-lg shadow p-6">
-                    <div class="flex items-center">
-                        <div class="flex-1">
-                            <h3 class="text-sm font-medium text-gray-500">Total Subscribers</h3>
-                            <p class="text-2xl font-semibold text-gray-900 mt-1">{{ $totalSubscribers }}</p>
-                        </div>
-                        <div class="w-12 h-12 bg-custom/10 rounded-full flex items-center justify-center">
-                            <i class="fas fa-users text-custom text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-green-500 text-sm font-medium">+2.5%</span>
-                        <span class="text-gray-500 text-sm ml-2">from last month</span>
-                    </div>
-                </div>
+           
 
-                <div class="bg-white rounded-lg shadow p-6">
-                    <div class="flex items-center">
-                        <div class="flex-1">
-                            <h3 class="text-sm font-medium text-gray-500">Active Events</h3>
-                            <p class="text-2xl font-semibold text-gray-900 mt-1">{{ $activeEvents }}</p>
-                        </div>
-                        <div class="w-12 h-12 bg-custom/10 rounded-full flex items-center justify-center">
-                            <i class="fas fa-calendar text-custom text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-green-500 text-sm font-medium">+4</span>
-                        <span class="text-gray-500 text-sm ml-2">new this week</span>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow p-6">
-                    <div class="flex items-center">
-                        <div class="flex-1">
-                            <h3 class="text-sm font-medium text-gray-500">Newsletter Opens</h3>
-                            <p class="text-2xl font-semibold text-gray-900 mt-1">{{ $averageOpensFormatted }}
-                            </p>
-                        </div>
-                        <div class="w-12 h-12 bg-custom/10 rounded-full flex items-center justify-center">
-                            <i class="fas fa-envelope-open text-custom text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-green-500 text-sm font-medium">+5.2%</span>
-                        <span class="text-gray-500 text-sm ml-2">above average</span>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow p-6">
-                    <div class="flex items-center">
-                        <div class="flex-1">
-                            <h3 class="text-sm font-medium text-gray-500">Content Pieces</h3>
-                            <p class="text-2xl font-semibold text-gray-900 mt-1">totalContentPieces</p>
-                        </div>
-                        <div class="w-12 h-12 bg-custom/10 rounded-full flex items-center justify-center">
-                            <i class="fas fa-file-alt text-custom text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-green-500 text-sm font-medium">+12</span>
-                        <span class="text-gray-500 text-sm ml-2">new items</span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="grid grid-cols-2 gap-6">
-                <div class="bg-white rounded-lg shadow p-6">
-                    <h3 class="text-lg font-medium text-gray-900">Engagement Overview</h3>
-                    <div id="engagementChart" class="h-80 mt-4"></div>
-                </div>
+            <section class="w-full">
 
                 <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="text-lg font-medium text-gray-900">Upcoming Events</h3>
@@ -115,7 +46,7 @@
 
             </section>
 
-            <section class="grid grid-cols-3 gap-6">
+            <section class="grid grid-cols-2 gap-3">
                 <div class="bg-white rounded-lg shadow p-6">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-medium text-gray-900">Recent Newsletters</h3>

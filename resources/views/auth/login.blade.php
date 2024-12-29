@@ -16,24 +16,23 @@
 </head>
 
 <body class="bg-gray-50 font-['Inter']">
-    <div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <!-- Header Section -->
-        <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <img class="mx-auto h-12 w-auto" src="https://ai-public.creatie.ai/gen_page/logo_placeholder.png"
-                alt="Company logo">
-            <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
-            <p class="mt-2 text-center text-sm text-gray-600">
-                Or
-                <a href="#" class="font-medium text-custom hover:text-custom/90">start your 14-day free trial</a>
-            </p>
-        </div>
-
-        <!-- Form Section -->
-        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-            <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+    <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 max-w-[80%] w-full mx-auto">
+            <!-- Left Section -->
+            <div class="bg-green-800 sm:mx-auto flex flex-col items-center justify-center sm:w-full h-full space-y-8 p-16 shadow-lg sm:rounded-lg">
+                <img class="mx-auto h-20 w-auto" src="https://admissions.dkut.ac.ke/images/logo.png" alt="Logo" />
+                <h2 class="mt-6 text-center text-4xl font-bold tracking-tight text-white">Sign in to your account</h2>
+                <p class="mt-4 text-center text-lg text-yellow-400">
+                    Don't have an account? 
+                    <a href="/register" class="font-medium text-white hover:text-custom/90">Sign up</a>
+                </p>
+            </div>
+    
+            <!-- Right Section -->
+            <div class="bg-white sm:mx-auto sm:w-full py-16 px-12 shadow-lg sm:rounded-lg">
                 <!-- Error Messages -->
                 @if ($errors->any())
-                    <div class="mb-4 p-4 bg-red-100 text-red-700 rounded">
+                    <div class="mb-6 p-4 bg-red-100 text-red-700 rounded">
                         <ul class="list-disc list-inside">
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -41,86 +40,74 @@
                         </ul>
                     </div>
                 @endif
-
-
+    
                 @if (session('status'))
-                    <div class="mb-4 p-4 bg-green-100 text-green-700 rounded">
+                    <div class="mb-6 p-4 bg-green-100 text-green-700 rounded">
                         {{ session('status') }}
                     </div>
                 @endif
-
-                <form class="space-y-6" action="{{ route('login') }}" method="POST">
+    
+                <!-- Form -->
+                <form class="space-y-8" action="{{ route('login') }}" method="POST">
                     @csrf
-                    <!-- Email Input -->
+    
+                    <!-- Email -->
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
-                        <div class="mt-1 relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-envelope text-gray-400"></i>
+                        <label for="email" class="block text-lg font-medium text-gray-700">Email address</label>
+                        <div class="mt-2 relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-gray-400 text-lg"></i>
                             </div>
                             <input id="email" name="email" type="email" autocomplete="email" required
                                 value="{{ old('email') }}"
-                                class="block w-full pl-10 !rounded-button border-gray-300 shadow-sm focus:border-custom focus:ring-custom sm:text-sm"
+                                class="block w-full pl-12 rounded-button border-gray-300 shadow-lg focus:border-custom focus:ring-custom text-lg"
                                 placeholder="Enter your email">
                         </div>
                     </div>
-
-                    <!-- Password Input -->
+    
+                    <!-- Password -->
                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                        <div class="mt-1 relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-lock text-gray-400"></i>
+                        <label for="password" class="block text-lg font-medium text-gray-700">Password</label>
+                        <div class="mt-2 relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400 text-lg"></i>
                             </div>
-                            <input id="password" name="password" type="password" autocomplete="current-password"
-                                required
-                                class="block w-full pl-10 !rounded-button border-gray-300 shadow-sm focus:border-custom focus:ring-custom sm:text-sm"
+                            <input id="password" name="password" type="password" autocomplete="current-password" required
+                                class="block w-full pl-12 rounded-button border-gray-300 shadow-lg focus:border-custom focus:ring-custom text-lg"
                                 placeholder="Enter your password">
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                            <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
                                 <button type="button" id="togglePassword"
                                     class="text-gray-400 hover:text-gray-500 focus:outline-none">
-                                    <i class="fas fa-eye"></i>
+                                    <i class="fas fa-eye text-lg"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
-
+    
                     <!-- Remember Me and Forgot Password -->
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
                             <input id="remember-me" name="remember" type="checkbox"
-                                class="h-4 w-4 !rounded-button text-custom focus:ring-custom border-gray-300">
-                            <label for="remember-me" class="ml-2 block text-sm text-gray-900">Remember me</label>
+                                class="h-6 w-6 rounded-button text-custom focus:ring-custom border-gray-300">
+                            <label for="remember-me" class="ml-3 block text-lg text-gray-900">Remember me</label>
                         </div>
-
-                        <div class="text-sm">
-                            <a href="#" class="font-medium text-custom hover:text-custom/90">Forgot your
-                                password?</a>
+                        <div class="text-lg">
+                            <a href="#" class="font-medium text-custom hover:text-custom/90">Forgot your password?</a>
                         </div>
                     </div>
-
+    
                     <!-- Submit Button -->
                     <div>
                         <button type="submit"
-                            class="w-full flex justify-center py-2 px-4 border border-transparent !rounded-button shadow-sm text-sm font-medium text-white bg-custom hover:bg-custom/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom">
+                            class="w-full flex justify-center py-4 px-6 border border-transparent rounded-button shadow-lg text-lg font-medium text-white bg-green-800 hover:bg-custom/90 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-custom">
                             Sign in
                         </button>
                     </div>
                 </form>
             </div>
         </div>
-
-        <!-- Footer -->
-        <div class="mt-8 text-center text-sm text-gray-600">
-            <p>Don't have an account? <a href="/register" class="font-medium text-custom hover:text-custom/90">Sign up</a>
-            </p>
-        </div>
-
-        <footer class="mt-8 text-center text-xs text-gray-500">
-            <p>© 2024 Your Company. All rights reserved.</p>
-            <p class="mt-1">Version 2.0.0 | Compatible with Chrome, Firefox, Safari</p>
-        </footer>
     </div>
+    
 
     <!-- Password Toggle Script -->
     <script>
