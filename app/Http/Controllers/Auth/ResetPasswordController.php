@@ -11,9 +11,11 @@ use App\Models\User;
 
 class ResetPasswordController extends Controller
 {
-    public function showResetForm($token)
+    public function showResetForm(Request $request, $token = null)
     {
-        return view('auth.reset-password', ['token' => $token]);
+        return view('auth.reset-password', [  
+        'request' => $request,
+        'token' => $token]);
     }
 
     public function reset(Request $request)
