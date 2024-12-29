@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Marketing Department</title>
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
@@ -17,25 +17,20 @@
         href="https://fonts.googleapis.com/css2?family=Agu+Display&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./css/home.css" />
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
 </head>
 
-<body class="bg-gray-100 text-gray-800 font-sans bg-auto bg-center" style="font-family:'Josefin Sans', sans-serif;">
-
-
-
+<body class="text-gray-800 font-sans">
     <header class="bg-green-800 text-white flex items-center justify-center">
-        <img src="./img/dekutlogo.png" class="w-12 mr-3" />
-        <div>
-            <div class="text-center">Dedan Kimathi University of Technology</div>
-        </div>
+        <img src="https://admissions.dkut.ac.ke/images/logo.png" class="h-16 py-2 mr-3" />
     </header>
 
     <!-- Navigation Menu -->
-    <nav class="sticky top-0 md:py-6 text-green-800 bg-white">
+    <nav class="sticky top-0 md:py-12 text-green-800 bg-white">
         <ul class="flex items-center justify-center gap-6">
             <li class="nav-item font-bold mr-2">
-                <a href="{{ url('/') }}">Home</a>
+                <a href="{{ url('/home') }}">Home</a>
             </li>
 
             <!-- Academics Dropdown -->
@@ -50,11 +45,11 @@
                     x-transition:leave-start="opacity-100 transform scale-100"
                     x-transition:leave-end="opacity-0 transform scale-95"
                     class="absolute left-0 top-full bg-white border border-gray-200 shadow-md mt-2 py-6 px-8 z-50 w-max">
-                    <div class="flex gap-12">
+                    <div class="flex gap-12 text-green-800">
                         <!-- Admission Section -->
-                        <div>
+                        <div class="text-green-800">
                             <h3 class="font-bold text-green-800 mb-4">Admission</h3>
-                            <ul class="space-y-2">
+                            <ul class="space-y-2 text-green-800">
                                 <li class="px-2 py-1 hover:bg-gray-100 cursor-pointer">
                                     <a
                                         href="https://www.dkut.ac.ke/index.php/academics/admission/application-procedure">Application
@@ -115,11 +110,11 @@
 
 
             <li class="nav-item font-bold mr-2">
-                <a href="#">Gallery</a>
+                <a href="/exhibits">Gallery</a>
             </li>
 
             <li class="nav-item font-bold mr-2">
-                <a href="#">Newsletters</a>
+                <a href="/newsletters">Newsletters</a>
             </li>
 
             <li class="nav-item font-bold mr-2">
@@ -128,11 +123,7 @@
         </ul>
     </nav>
 
-
-
     {{ $slot }}
-
-   
 
     <footer class="bg-green-900 text-white text-center p-6">
         <p>
@@ -150,6 +141,7 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js" defer></script>
+    @vite('resources/js/app.js')
 </body>
 
 </html>
