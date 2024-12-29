@@ -19,15 +19,16 @@
     <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 max-w-[80%] w-full mx-auto">
             <!-- Left Section -->
-            <div class="bg-green-800 sm:mx-auto flex flex-col items-center justify-center sm:w-full h-full space-y-8 p-16 shadow-lg sm:rounded-lg">
+            <div
+                class="bg-green-800 sm:mx-auto flex flex-col items-center justify-center sm:w-full h-full space-y-8 p-16 shadow-lg sm:rounded-lg">
                 <img class="mx-auto h-20 w-auto" src="https://admissions.dkut.ac.ke/images/logo.png" alt="Logo" />
                 <h2 class="mt-6 text-center text-4xl font-bold tracking-tight text-white">Sign in to your account</h2>
                 <p class="mt-4 text-center text-lg text-yellow-400">
-                    Don't have an account? 
+                    Don't have an account?
                     <a href="/register" class="font-medium text-white hover:text-custom/90">Sign up</a>
                 </p>
             </div>
-    
+
             <!-- Right Section -->
             <div class="bg-white sm:mx-auto sm:w-full py-16 px-12 shadow-lg sm:rounded-lg">
                 <!-- Error Messages -->
@@ -40,17 +41,17 @@
                         </ul>
                     </div>
                 @endif
-    
+
                 @if (session('status'))
                     <div class="mb-6 p-4 bg-green-100 text-green-700 rounded">
                         {{ session('status') }}
                     </div>
                 @endif
-    
+
                 <!-- Form -->
                 <form class="space-y-8" action="{{ route('login') }}" method="POST">
                     @csrf
-    
+
                     <!-- Email -->
                     <div>
                         <label for="email" class="block text-lg font-medium text-gray-700">Email address</label>
@@ -64,7 +65,7 @@
                                 placeholder="Enter your email">
                         </div>
                     </div>
-    
+
                     <!-- Password -->
                     <div>
                         <label for="password" class="block text-lg font-medium text-gray-700">Password</label>
@@ -72,7 +73,8 @@
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <i class="fas fa-lock text-gray-400 text-lg"></i>
                             </div>
-                            <input id="password" name="password" type="password" autocomplete="current-password" required
+                            <input id="password" name="password" type="password" autocomplete="current-password"
+                                required
                                 class="block w-full pl-12 rounded-button border-gray-300 shadow-lg focus:border-custom focus:ring-custom text-lg"
                                 placeholder="Enter your password">
                             <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
@@ -83,7 +85,7 @@
                             </div>
                         </div>
                     </div>
-    
+
                     <!-- Remember Me and Forgot Password -->
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
@@ -92,10 +94,11 @@
                             <label for="remember-me" class="ml-3 block text-lg text-gray-900">Remember me</label>
                         </div>
                         <div class="text-lg">
-                            <a href="#" class="font-medium text-custom hover:text-custom/90">Forgot your password?</a>
+                            <a href="{{ route('password.request') }}"
+                                class="font-medium text-custom hover:text-custom/90">Forgot your password?</a>
                         </div>
                     </div>
-    
+
                     <!-- Submit Button -->
                     <div>
                         <button type="submit"
@@ -107,7 +110,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <!-- Password Toggle Script -->
     <script>

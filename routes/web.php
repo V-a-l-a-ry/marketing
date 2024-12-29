@@ -13,6 +13,8 @@ use App\Http\Controllers\ExhibitController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\InfohubController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 // ------------------------------
 // Public Routes
 // ------------------------------
@@ -27,6 +29,13 @@ Route::get('/', function () {
 // Login Routes
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
+
+
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
 
 // User Registration Routes
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
