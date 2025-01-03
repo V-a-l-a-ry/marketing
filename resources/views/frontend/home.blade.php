@@ -1,5 +1,5 @@
 <x-frontend-layout>
-   
+
     <div class="hero bg-cover h-screen md:h-[650px] bg-center text-white text-center py-36 flex flex-col justify-center"
         style="
     background-image: url('https://i.pinimg.com/736x/bf/1d/df/bf1ddf5a001515cfeb53f7f02879703e.jpg');
@@ -26,8 +26,12 @@
         <div class="py-4 flex gap-8 md:flex-row flex-col items-center justify-center">
             <p
                 class="border rounded-xl font-bold border-white hover:bg-white hover:text-green-800 transition-all px-3 md:px-10 py-3 text-xl mr-2">
-                <a href="#">Plan a Visit <i class="fa-solid fa-angle-right"></i></a>
+                <a href="mailto:marketing@dkut.ac.ke?subject=Contact Us&body=Please write your message here."
+                    class="flex items-center">
+                    Contact Us <i class="fa-solid fa-angle-right"></i>
+                </a>
             </p>
+
             <p
                 class="border rounded-xl font-bold hover:bg-white hover:text-green-800 transition-all border-white px-3 md:px-10 py-3 text-xl mr-2">
                 <a href="/infohub">Infohub <i class="fa-solid fa-angle-right"></i></a>
@@ -161,7 +165,7 @@
     </p> --}}
     </section>
 
-    <section class="shadow-lg md:w-3/4 mx-auto mt-12 rounded-xl bg-white">
+    <section class="shadow-lg md:w-3/4 mx-auto mt-12 mb-16 rounded-xl bg-white">
         <div class="text-center py-8 space-y-6 text-green-600">
             <h3 class="text-3xl font-bold">Experience DeKUT Marketing</h3>
             <p class="w-3/4 mx-auto">
@@ -237,50 +241,7 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <div class="mx-auto my-12 md:w-5/6 px-4 grid md:grid-cols-2 gap-6">
-        <!-- Contact Info -->
-        <div class="bg-green-700 rounded-xl text-white p-6 shadow">
-            <h2 class="text-2xl font-bold mb-4">
-                Reach us through our social media platforms:
-            </h2>
-            <p class="mb-4">
-                <span class="font-bold">📞 Contact:</span> +254 713123021
-            </p>
-            <div class="flex justify-evenly space-x-4">
-                <a href="#" class="text-center">
-                    <img src="https://cdn-icons-png.flaticon.com/128/3955/3955024.png" alt="Instagram"
-                        class="w-12 h-12 border-2 border-white mb-2 transition-transform transform hover:scale-110" />
-                    <span>Instagram</span>
-                </a>
-                <a href="#" class="text-center">
-                    <img src="https://cdn-icons-png.flaticon.com/128/5968/5968830.png" alt="Twitter"
-                        class="w-12 h-12 border-2 border-white mb-2 transition-transform transform hover:scale-110" />
-                    <span>Twitter</span>
-                </a>
-                <a href="#" class="text-center">
-                    <img src="https://cdn-icons-png.flaticon.com/128/1051/1051309.png" alt="Facebook"
-                        class="w-12 h-12 border-2 border-white mb-2 transition-transform transform hover:scale-110" />
-                    <span>Facebook</span>
-                </a>
-            </div>
-        </div>
 
-        <!-- Contact Form -->
-        <div class="bg-white p-6 shadow rounded-xl">
-            <h2 class="text-2xl font-bold mb-4 text-gray-800">Get in Touch</h2>
-            <form action="mailto:marketing@dkut.ac.ke" method="post" class="space-y-4">
-                <input type="text" placeholder="Your Name" required
-                    class="w-full border border-gray-300 px-4 py-2 focus:ring focus:ring-green-400" />
-                <input type="email" placeholder="Your Email" required
-                    class="w-full border border-gray-300 px-4 py-2 focus:ring focus:ring-green-400" />
-                <textarea placeholder="Type your message here..." rows="5" required
-                    class="w-full border border-gray-300 px-4 py-2 focus:ring focus:ring-green-400"></textarea>
-                <button type="submit"
-                    class="rounded-xl w-full bg-green-700 text-white py-2 hover:bg-green-800 transition">
-                    Send
-                </button>
-            </form>
-        </div>
-    </div>
+
+
 </x-frontend-layout>

@@ -22,7 +22,7 @@ class ForgotPasswordController extends Controller
 
         // Send the reset password link
         $response = Password::sendResetLink($request->only('email'));
-
+        
         if ($response == Password::RESET_LINK_SENT) {
             return back()->with('status', 'We have e-mailed your password reset link!');
         }
