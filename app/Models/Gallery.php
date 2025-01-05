@@ -9,23 +9,45 @@ class Gallery extends Model
 {
     use HasFactory;
 
-    // Specify the fields that are mass assignable
+    // Table name (optional if convention followed)
+    protected $table = 'galleries';
+
+    // Mass assignable attributes
     protected $fillable = [
-        'name',
-        'gallery_description',
-        'thumbnail',
-        'gallery_comments',
-        'user_id', // Assuming you have a user_id foreign key
+        'title',      // Gallery Title
+        'type',       // Media Type (image, video, document)
+        'media_url',  // File Path for Media (e.g., image path)
+        'send_date',  // Send Date (optional)
+        'opens',      // Number of opens (optional)
     ];
 
-    // Define the relationship with the User model
-    public function user(){
-        return $this->belongsTo(User::class);
+    // Accessor to get full URL of media_url field
+    public function getMediaUrlAttribute($value)
+    {
+        return asset('storage/' . $value);
     }
 
-    // Define the relationship with the Photo model
-    public function photos()
+    // Casts to ensure correct data types
+    protected $casts = [
+        'send_date' => 'date',  // Cast send_date to Carbon date
+        'opens' => 'integer',   // Cast opens to integer
+    ];
+
+    // Accessor for formatted status (optional)
+    public function getFormattedStatusAttribute()
     {
-        return $this->hasMany(Photo::class);
+        return ucfirst($this->status);
+    }
+
+    // Scope for filtering by media type (optional)
+    public function scopeOfType($query, $type)
+    {
+        return $query->where('type', $type);
+    }
+
+    // Relationship to the Image model
+    public function images()
+    {
+        return $this->hasMany(Image::class);
     }
 }
