@@ -9,22 +9,17 @@ class Newsletter extends Model
 {
     use HasFactory;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'newsletters';
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    // Mass assignable attributes
     protected $fillable = [
         'title',
-        'category',
-        'content',
-        'image_path',
+        'category_id',
+        'content',      // Added 'content' to store the newsletter's content
+        'send_date',
+        'opens',
+    ];
+
+    // Casts for specific fields
+    protected $casts = [
+        'send_date' => 'datetime', // Automatically cast send_date to a Carbon object
     ];
 }
