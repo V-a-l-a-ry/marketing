@@ -27,7 +27,7 @@
     </header>
 
     <!-- Navigation Menu -->
-    <nav class="sticky top-0 md:py-12 text-green-800 bg-white">
+    <nav class="sticky top-0 z-20 md:py-12 text-green-800 bg-white">
         <ul class="flex items-center justify-center gap-6">
             <li class="nav-item font-bold mr-2">
                 <a href="{{ url('/home') }}">Home</a>

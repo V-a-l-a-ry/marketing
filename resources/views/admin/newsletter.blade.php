@@ -13,7 +13,7 @@
 
                     </div>
                     <div class="p-6">
-                       
+
                         <div class="overflow-x-auto">
                             <div class="container mx-auto mt-8">
                                 <h1 class="text-2xl font-bold mb-4">Newsletters</h1>
@@ -63,7 +63,7 @@
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     <span
                                                         class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                                                        {{ $newsletter->category->name ?? 'Uncategorized' }}
+                                                        {{ $newsletter->category_id ?? 'Uncategorized' }}
                                                     </span>
                                                 </td>
 

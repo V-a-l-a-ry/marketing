@@ -4,22 +4,25 @@
         <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 lg:w-5/6 w-full mx-auto">
                 <!-- Left Section -->
-                <div class="bg-green-800 sm:mx-auto hidden xl:flex flex-col items-center justify-center sm:w-full h-full space-y-8 p-16 shadow-lg sm:rounded-lg">
+                <div
+                    class="bg-green-800 sm:mx-auto hidden xl:flex flex-col items-center justify-center sm:w-full h-full space-y-8 p-16 shadow-lg sm:rounded-lg">
                     <img class="mx-auto h-20 w-auto" src="https://admissions.dkut.ac.ke/images/logo.png" alt="Logo" />
-                    <h2 class="mt-6 text-center text-4xl font-bold tracking-tight text-white">Submit Newsletter Article</h2>
+                    <h2 class="mt-6 text-center text-4xl font-bold tracking-tight text-white">Submit Newsletter Article
+                    </h2>
                     <p class="mt-4 text-center text-lg text-yellow-400">
                         Share your article with our subscribers and make an impact.
                     </p>
                 </div>
-    
+
                 <!-- Right Section -->
                 <div class="bg-white sm:mx-auto sm:w-full py-16 px-12 shadow-lg sm:rounded-lg">
                     <form class="space-y-8" action="{{ route('newsletters.store') }}" method="POST">
                         @csrf
-    
+
                         <!-- Newsletter Title -->
                         <div>
-                            <label for="title" class="block text-lg font-medium text-gray-700">Newsletter Title</label>
+                            <label for="title" class="block text-lg font-medium text-gray-700">Newsletter
+                                Title</label>
                             <div class="mt-2 relative">
                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                     <i class="fas fa-heading text-gray-400 text-lg"></i>
@@ -32,37 +35,53 @@
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
-    
+
                         <!-- Category -->
                         <div>
                             <label for="category_id" class="block text-lg font-medium text-gray-700">Category</label>
                             <select id="category_id" name="category_id" required
                                 class="block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom text-lg">
                                 <option value="" disabled selected>Select a category</option>
-                                <option value="1" {{ old('category_id') == 1 ? 'selected' : '' }}>Luminaries</option>
-                                <option value="2" {{ old('category_id') == 2 ? 'selected' : '' }}>Mentorships</option>
-                                <option value="3" {{ old('category_id') == 3 ? 'selected' : '' }}>Events</option>
-                                <option value="4" {{ old('category_id') == 4 ? 'selected' : '' }}>News</option>
+                                <option value="1" {{ old('category_id') == 'Luminaries' ? 'selected' : '' }}>
+                                    Luminaries</option>
+                                <option value="2" {{ old('category_id') == 'Mentorships' ? 'selected' : '' }}>
+                                    Mentorships</option>
+                                <option value="3" {{ old('category_id') == 'Events' ? 'selected' : '' }}>Events
+                                </option>
+                                <option value="4" {{ old('category_id') == 'News' ? 'selected' : '' }}>News
+                                </option>
                             </select>
+
                             @error('category_id')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
-    
-                        <!-- Content -->
+
+                        <!-- Content File Upload -->
                         <div>
-                            <label for="content" class="block text-lg font-medium text-gray-700">Content</label>
-                            <textarea id="content" name="content" rows="5" required
-                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom text-lg"
-                                placeholder="Write your newsletter content here...">{{ old('content') }}</textarea>
-                            @error('content')
+                            <label for="content_file" class="block text-lg font-medium text-gray-700">Upload Content
+                                File</label>
+                            <div class="mt-2 relative">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <i class="fas fa-file-alt text-gray-400 text-lg"></i>
+                                </div>
+                                <input id="content_file" name="content_file" type="file" required
+                                    class="block w-full pl-12 rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom text-lg"
+                                    accept=".txt,.doc,.docx,.pdf" aria-describedby="file-upload-description" />
+                            </div>
+                            <p id="file-upload-description" class="text-sm text-gray-500">Accepted formats: .txt, .doc,
+                                .docx, .pdf</p>
+                            @error('content_file')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
-    
+
+
+
                         <!-- Send Date -->
                         <div>
-                            <label for="send_date" class="block text-lg font-medium text-gray-700">Send Date (Optional)</label>
+                            <label for="send_date" class="block text-lg font-medium text-gray-700">Send Date
+                                (Optional)</label>
                             <div class="mt-2 relative">
                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                     <i class="fas fa-calendar-alt text-gray-400 text-lg"></i>
@@ -75,18 +94,9 @@
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
-    
-                        <!-- Opens -->
-                        <div>
-                            <label for="opens" class="block text-lg font-medium text-gray-700">Opens (Optional)</label>
-                            <input id="opens" name="opens" type="number" min="0"
-                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom text-lg"
-                                placeholder="Enter the number of opens" value="{{ old('opens') }}" />
-                            @error('opens')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-    
+
+
+
                         <!-- Submit Button -->
                         <div>
                             <button type="submit"
@@ -99,6 +109,5 @@
             </div>
         </div>
     </body>
-    
-    </x-layout>
-    
+
+</x-layout>

@@ -1,6 +1,6 @@
 # Getting Started
 
-Welcome to the **Photo Gallery App** documentation. This guide will walk you through the steps needed to set up and run the application on your local machine.
+Welcome to the **Marketing Website for DeKUT Documentation** documentation. This guide will walk you through the steps needed to set up and run the application on your local machine.
 
 - Sidenotes
 
@@ -95,3 +95,8 @@ Now, you can start the Laravel development server:
 php artisan serve
 ```
 Your application should now be running at `http://127.0.0.1:8000`.
+
+```bash
+npm run dev
+```
+

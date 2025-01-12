@@ -1,67 +1,148 @@
 <x-frontend-layout>
-    <div class="container mx-auto px-4 py-8">
-        <!-- Featured Section -->
-        @if ($newsletters->isNotEmpty())
-            <div class="bg-gray-100 rounded-lg shadow-lg mb-12 overflow-hidden">
-                <div class="flex flex-col lg:flex-row">
-                    <div class="lg:w-1/2 bg-cover bg-center"
-                        style="background-image: url('{{ $newsletters->first()->image_url ?? 'default-feature-image.jpg' }}'); height: 300px;">
-                    </div>
-                    <div class="lg:w-1/2 p-6">
-                        <h1 class="text-3xl font-bold text-gray-800 mb-4">{{ $newsletters->first()->title }}</h1>
-                        <p class="text-gray-600 mb-4">
-                            {{ Str::limit(strip_tags($newsletters->first()->content), 150) }}
-                        </p>
-                        <p class="text-gray-500 text-sm mb-2">Category: <span
-                                class="font-medium">{{ $newsletters->first()->category_id }}</span></p>
-                        <p class="text-gray-500 text-sm">Send Date: <span
-                                class="font-medium">{{ $newsletters->first()->send_date ? $newsletters->first()->send_date->format('F j, Y') : 'Not Scheduled' }}</span>
-                        </p>
-                        <div class="mt-6">
-                            <a href="{{ route('newsletters.show', $newsletters->first()->id) }}"
-                                class="inline-block px-6 py-2 text-sm font-medium text-white bg-green-700 rounded hover:bg-green-600 transition duration-300">
-                                Read Featured Newsletter
-                            </a>
-                        </div>
-                    </div>
+    <div class="mx-auto px-6 py-8 grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <!-- Sidebar -->
+        <aside class="col-span-1 lg:col-span-1">
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <h2 class="text-lg font-semibold mb-4">Categories</h2>
+                <div class="space-y-3">
+                    @php
+                        $categories = $newsletters->pluck('category_id')->unique();
+                    @endphp
+
+                    @foreach ($categories as $category)
+                        @php
+                            $articleCount = $newsletters->where('category_id', $category)->count();
+                        @endphp
+                        <a href="{{ route('newsletters.index', ['category' => $category]) }}"
+                            class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50">
+                            <div class="flex items-center">
+                                <i class="fas fa-tag w-5"></i>
+                                <span class="ml-3">{{ $category ?? 'Uncategorized' }}</span>
+                            </div>
+                            <span class="text-sm">{{ $articleCount }}</span>
+                        </a>
+                    @endforeach
                 </div>
             </div>
-        @endif
 
-        <!-- Main Newsletter List -->
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-gray-800">Newsletters</h1>
-            <p class="text-gray-600 mt-2">Stay updated with our latest newsletters</p>
-        </div>
+            <!-- Subscription Form Section -->
+            <div class="mt-8 bg-white rounded-lg shadow-sm p-6">
+                <h2 class="text-lg font-semibold mb-4">Subscribe</h2>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
+                        <input type="email" class="w-full border-gray-300 rounded-lg shadow-sm"
+                            placeholder="you@example.com" />
+                    </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            @forelse ($newsletters->skip(1) as $newsletter)
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <div class="p-6">
-                        <h2 class="text-2xl font-semibold text-gray-800 mb-3">
-                            {{ $newsletter->title }}
-                        </h2>
-                        <p class="text-gray-600 text-sm mb-4">
-                            {{ Str::limit(strip_tags($newsletter->content), 100) }}
-                        </p>
-                        <p class="text-gray-500 text-xs mb-2">Category: <span
-                                class="font-medium">{{ $newsletter->category_id }}</span></p>
-                        <p class="text-gray-500 text-xs">Send Date: <span
-                                class="font-medium">{{ $newsletter->send_date ? $newsletter->send_date->format('F j, Y') : 'Not Scheduled' }}</span>
-                        </p>
-                        <div class="mt-6 text-center">
-                            <a href="{{ route('newsletters.show', $newsletter->id) }}"
-                                class="inline-block px-6 py-2 text-sm font-medium text-white bg-green-700 rounded hover:bg-green-600 transition duration-300">
-                                Read More
-                            </a>
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-gray-700">Categories</label>
+                        <div class="space-y-2">
+                            @foreach ($categories as $category)
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-custom" />
+                                    <span class="ml-2 text-sm">{{ $category ?? 'Uncategorized' }}</span>
+                                </label>
+                            @endforeach
                         </div>
                     </div>
+
+                    <button type="submit" class="w-full bg-custom text-white py-2 text-sm font-medium rounded-lg">
+                        Subscribe
+                    </button>
+                    <p class="text-xs text-gray-500">
+                        By subscribing, you agree to our
+                        <a href="#" class="text-custom">Privacy Policy</a>
+                    </p>
+                </form>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="col-span-1 lg:col-span-3">
+            @if ($newsletters->isNotEmpty())
+                <div class="relative bg-white rounded-lg font-bold shadow-sm mb-8 overflow-hidden group">
+                    <img src="{{ $newsletters->first()->image_url ?? 'default-image.jpg' }}" alt="Featured Newsletter"
+                        class="w-full h-[400px] object-cover group-hover:opacity-70 transition duration-300" />
+                    <div
+                        class="absolute inset-0 flex flex-col font-bold justify-end bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 p-6">
+                        <h1 class="text-2xl font-bold text-white mt-2 mb-3">
+                            {{ $newsletters->first()->title }}
+                        </h1>
+                        <span class="bg-custom/10 text-white px-2.5 py-0.5 rounded-full text-xs">
+                            {{ $newsletters->first()->category_id ?? 'Uncategorized' }}
+                        </span>
+                        <p class="text-gray-200 mb-4">
+                            {{ Str::limit(strip_tags($newsletters->first()->content), 150) }}
+                        </p>
+                        <div class="flex items-center text-sm text-gray-300">
+                            <span><i
+                                    class="far fa-clock mr-1"></i>{{ $newsletters->first()->read_time ?? '5 min read' }}</span>
+                            <span class="mx-2">·</span>
+                            <span>{{ $newsletters->first()->send_date ? $newsletters->first()->send_date->format('F j, Y') : 'Not Scheduled' }}</span>
+                        </div>
+                        @if ($newsletters->first()->file_url)
+                            <div class="mt-4">
+                                <a href="{{ asset('storage/' . $newsletters->first()->file_url) }}" target="_blank"
+                                    class="text-green-400 font-medium hover:underline transition duration-300">
+                                    Download File
+                                </a>
+                            </div>
+                        @endif
+                    </div>
                 </div>
-            @empty
-                <div class="col-span-3 text-center">
-                    <p class="text-gray-500">No newsletters available.</p>
-                </div>
-            @endforelse
-        </div>
+            @endif
+
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-gray-800">Newsletters</h1>
+                <p class="text-gray-600 mt-2">Stay updated with our latest newsletters</p>
+            </div>
+
+            @php
+                $filteredCategory = request('category');
+                $filteredNewsletters = $filteredCategory
+                    ? $newsletters->where('category_id', $filteredCategory)
+                    : $newsletters;
+                $groupedNewsletters = $filteredNewsletters->groupBy('category_id');
+            @endphp
+
+            @if ($filteredNewsletters->isEmpty())
+                <p class="text-gray-500 text-center">No newsletters found for this category.</p>
+            @else
+                @foreach ($groupedNewsletters as $category => $categoryNewsletters)
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+                            {{ $category ?? 'Uncategorized' }}
+                        </h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            @foreach ($categoryNewsletters as $newsletter)
+                                <div class="bg-green-50 rounded-lg shadow-sm p-6 hover:shadow-lg">
+                                    <img src="{{ $newsletter->image_url ?? 'default-placeholder.jpg' }}"
+                                        alt="{{ $newsletter->title }}"
+                                        class="w-full h-[200px] object-cover rounded-lg mb-4" />
+                                    <h3 class="text-xl font-semibold mt-2 mb-3">{{ $newsletter->title }}</h3>
+                                    <p class="text-gray-600 text-sm mb-4">
+                                        {{ Str::limit(strip_tags($newsletter->content), 100) }}</p>
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <span><i
+                                                class="far fa-clock mr-1"></i>{{ $newsletter->read_time ?? '5 min read' }}</span>
+                                        <span class="mx-2">·</span>
+                                        <span>{{ $newsletter->send_date ? $newsletter->send_date->format('F j, Y') : 'Not Scheduled' }}</span>
+                                    </div>
+                                    <div class="mt-4">
+
+                                        <a href="{{ asset('storage/' . $newsletter->file_url) }}"
+                                            class="inline-block text-white px-4 py-2 rounded-lg text-sm bg-green-500">
+                                            Download File
+                                        </a>
+
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </main>
     </div>
 </x-frontend-layout>

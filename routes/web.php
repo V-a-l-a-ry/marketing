@@ -16,16 +16,6 @@ use App\Http\Controllers\admin\GalleryController;
 use App\Http\Controllers\frontend\ArticleController;
 use App\Http\Controllers\frontend\InfohubController;
 
-// ------------------------------
-// Public Routes
-// ------------------------------
-
-// Home Route
-Route::get('/', function () {
-    return Auth::check()
-        ? redirect()->route('admin.dashboard')
-        : redirect()->route('login');
-})->name('home');
 
 // ------------------------------
 // Auth Routes
@@ -109,10 +99,10 @@ Route::get('/exhibits/{gallery}', [ExhibitController::class, 'show'])->name('exh
 
 // Newsletter Article Routes
 Route::get('/newsletters', [ArticleController::class, 'index'])->name('newsletters.index');
-Route::get('/newsletters/{newsletter}', [ArticleController::class, 'show'])->name('newsletters.show');
+Route::get('newsletters/{newsletter}/download', [ArticleController::class, 'download'])->name('newsletters.download');
 
 // Frontend Home Route
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('frontend.home');
 });
 
