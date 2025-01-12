@@ -11,13 +11,14 @@ return new class extends Migration
         Schema::create('newsletters', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->foreignId('category_id');
-            $table->text('content')->nullable()->after('title');
+            $table->string('category_id');
+            $table->string('content_path')->nullable()->after('title');
             $table->date('send_date')->nullable();
             $table->integer('opens')->default(0);
             $table->timestamps();
         });
     }
+
 
     public function down()
     {

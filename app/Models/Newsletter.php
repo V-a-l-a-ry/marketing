@@ -13,9 +13,11 @@ class Newsletter extends Model
     protected $fillable = [
         'title',
         'category_id',
-        'content',      // Added 'content' to store the newsletter's content
+        'content_path', // Path to the file content
         'send_date',
         'opens',
+        'read_time',   // Estimated read time in minutes
+        'image_url',   // Path to the newsletter's featured image
     ];
 
     // Casts for specific fields

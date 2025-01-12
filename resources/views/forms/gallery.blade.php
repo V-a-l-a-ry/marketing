@@ -63,17 +63,7 @@
                             @enderror
                         </div>
 
-                        <!-- Opens -->
-                        <div>
-                            <label for="opens" class="block text-lg font-medium text-gray-700">Opens
-                                (Optional)</label>
-                            <input id="opens" name="opens" type="number" min="0"
-                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom text-lg"
-                                placeholder="Enter the number of opens" value="{{ old('opens', 0) }}" />
-                            @error('opens')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
+                       
 
                         <!-- Submit Button -->
                         <div>
