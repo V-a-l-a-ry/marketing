@@ -31,16 +31,12 @@ class NewsletterController extends Controller
             'content_file' => 'required', // Validate file type and size
         ]);
 
-        $filePath = $request->hasFile('content_file')
-            ? $request->file('content_file')->store('newsletters')
-            : null;
+        $filePath = $request->file('content_file')->store('newsletters', 'public');
 
-        Newsletter::create([
-            'title' => $request->title,
-            'category_id' => $request->category_id,
-            'send_date' => $request->send_date,
-            'content_path' => $filePath,
-        ]);
+
+        $newsletter = new Newsletter();
+        $newsletter->content_path = $filePath;
+        $newsletter->save();
 
         return redirect()->route('newsletter.index')
             ->with('success', 'Newsletter created successfully.');

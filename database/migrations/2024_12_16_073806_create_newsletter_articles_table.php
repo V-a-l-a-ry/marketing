@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('category_id');
-            $table->string('content_path')->nullable()->after('title');
+            $table->string('content_file')->nullable()->after('title');
             $table->date('send_date')->nullable();
             $table->integer('opens')->default(0);
             $table->timestamps();
