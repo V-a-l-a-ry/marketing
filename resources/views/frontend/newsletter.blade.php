@@ -130,13 +130,12 @@
                                         <span>{{ $newsletter->send_date ? $newsletter->send_date->format('F j, Y') : 'Not Scheduled' }}</span>
                                     </div>
                                     <div class="mt-4">
-
-                                        <a href="{{ asset('storage/' . $newsletter->file_url) }}"
+                                        <a href="{{ asset('storage/' . $newsletter->content_file) }}"
                                             class="inline-block text-white px-4 py-2 rounded-lg text-sm bg-green-500">
                                             Download File
                                         </a>
-
                                     </div>
+
                                 </div>
                             @endforeach
                         </div>

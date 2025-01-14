@@ -35,8 +35,10 @@ class ArticleController extends Controller
      */
     public function download(Newsletter $newsletter)
     {
-        if ($newsletter->content_path && file_exists(storage_path("app/public/{$newsletter->content_path}"))) {
-            return response()->download(storage_path("app/public/{$newsletter->content_path}"));
+        $filePath = storage_path("app/public/{$newsletter->content_path}");
+
+        if ($newsletter->content_path && file_exists($filePath)) {
+            return response()->download($filePath);
         }
 
         return back()->withErrors(['error' => 'The file does not exist.']);

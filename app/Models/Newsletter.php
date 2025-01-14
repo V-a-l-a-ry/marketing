@@ -13,7 +13,7 @@ class Newsletter extends Model
     protected $fillable = [
         'title',
         'category_id',
-        'content_path', // Path to the file content
+        'content_file',
         'send_date',
         'opens',
         'read_time',   // Estimated read time in minutes
