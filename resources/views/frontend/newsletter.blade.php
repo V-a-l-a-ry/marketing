@@ -24,45 +24,14 @@
                     @endforeach
                 </div>
             </div>
-
-            <!-- Subscription Form Section -->
-            <div class="mt-8 bg-white rounded-lg shadow-sm p-6">
-                <h2 class="text-lg font-semibold mb-4">Subscribe</h2>
-                <form class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
-                        <input type="email" class="w-full border-gray-300 rounded-lg shadow-sm"
-                            placeholder="you@example.com" />
-                    </div>
-
-                    <div class="space-y-2">
-                        <label class="block text-sm font-medium text-gray-700">Categories</label>
-                        <div class="space-y-2">
-                            @foreach ($categories as $category)
-                                <label class="flex items-center">
-                                    <input type="checkbox" class="rounded border-gray-300 text-custom" />
-                                    <span class="ml-2 text-sm">{{ $category ?? 'Uncategorized' }}</span>
-                                </label>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <button type="submit" class="w-full bg-custom text-white py-2 text-sm font-medium rounded-lg">
-                        Subscribe
-                    </button>
-                    <p class="text-xs text-gray-500">
-                        By subscribing, you agree to our
-                        <a href="#" class="text-custom">Privacy Policy</a>
-                    </p>
-                </form>
-            </div>
         </aside>
 
         <!-- Main Content -->
         <main class="col-span-1 lg:col-span-3">
             @if ($newsletters->isNotEmpty())
                 <div class="relative bg-white rounded-lg font-bold shadow-sm mb-8 overflow-hidden group">
-                    <img src="{{ $newsletters->first()->image_url ?? 'default-image.jpg' }}" alt="Featured Newsletter"
+                    <img src="https://i.pinimg.com/736x/bf/1d/df/bf1ddf5a001515cfeb53f7f02879703e.jpg"
+                        alt="Featured Newsletter"
                         class="w-full h-[400px] object-cover group-hover:opacity-70 transition duration-300" />
                     <div
                         class="absolute inset-0 flex flex-col font-bold justify-end bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 p-6">
@@ -117,9 +86,9 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                             @foreach ($categoryNewsletters as $newsletter)
                                 <div class="bg-green-50 rounded-lg shadow-sm p-6 hover:shadow-lg">
-                                    <img src="{{ $newsletter->image_url ?? 'default-placeholder.jpg' }}"
+                                    {{-- <img src="{{ $newsletter->image_url ?? 'default-placeholder.jpg' }}"
                                         alt="{{ $newsletter->title }}"
-                                        class="w-full h-[200px] object-cover rounded-lg mb-4" />
+                                        class="w-full h-[200px] object-cover rounded-lg mb-4" /> --}}
                                     <h3 class="text-xl font-semibold mt-2 mb-3">{{ $newsletter->title }}</h3>
                                     <p class="text-gray-600 text-sm mb-4">
                                         {{ Str::limit(strip_tags($newsletter->content), 100) }}</p>

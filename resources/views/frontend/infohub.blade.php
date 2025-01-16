@@ -31,35 +31,16 @@
             </div>
         </nav>
     </header>
-    <div class="glide relative h-[800px] overflow-hidden">
-        <div class="glide__track" data-glide-el="track">
-            <ul class="glide__slides">
-                <li class="glide__slide relative">
-                    <img src="https://i.pinimg.com/736x/bf/1d/df/bf1ddf5a001515cfeb53f7f02879703e.jpg"
-                        class="w-full h-[800px] object-cover" alt="Campus Life">
-                    <div
-                        class="absolute inset-0 flex justify-center items-center text-white bg-black bg-opacity-50 p-4">
-                        <h2 class="text-4xl font-bold">Explore Campus Life</h2>
-                    </div>
-                </li>
-                <li class="glide__slide relative">
-                    <img src="https://i.pinimg.com/736x/bf/1d/df/bf1ddf5a001515cfeb53f7f02879703e.jpg"
-                        class="w-full h-[800px] object-cover" alt="Campus">
-                    <div
-                        class="absolute inset-0 flex justify-center items-center text-white bg-black bg-opacity-50 p-4">
-                        <h2 class="text-4xl font-bold">Join Us for a Journey of Discovery</h2>
-                    </div>
-                </li>
-                <li class="glide__slide relative">
-                    <img src="https://i.pinimg.com/736x/bf/1d/df/bf1ddf5a001515cfeb53f7f02879703e.jpg"
-                        class="w-full h-[800px] object-cover" alt="Graduation">
-                    <div
-                        class="absolute inset-0 flex justify-center items-center text-white bg-black bg-opacity-50 p-4">
-                        <h2 class="text-4xl font-bold">Celebrate Your Graduation with Us</h2>
-                    </div>
-                </li>
-            </ul>
+    <div class="relative h-[800px] overflow-hidden">
+        <div class="relative h-[800px] overflow-hidden">
+            <img src="https://i.pinimg.com/736x/bf/1d/df/bf1ddf5a001515cfeb53f7f02879703e.jpg"
+                class="w-full h-[800px] object-cover" alt="Campus Life">
+            <div
+                class="absolute inset-0 flex justify-center items-center text-white bg-black bg-opacity-50 p-4 opacity-0 hover:opacity-100 transition-opacity duration-500 ease-in-out">
+                <h2 class="text-4xl font-bold">Explore Campus Life</h2>
+            </div>
         </div>
+
     </div>
     </div>
 
@@ -340,4 +321,5 @@
 
 </body>
 @vite('resources/js/app.js')
+
 </html>

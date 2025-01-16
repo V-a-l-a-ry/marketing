@@ -103,10 +103,10 @@
                 </p>
 
                 <div class="flex md:flex-row flex-col gap-4 items-center justify-center">
-                    <button
+                    {{-- <button
                         class="px-3 py-6 rounded-xl bg-green-800 text-white font-bold hover:bg-yellow-400 hover:border hover:border-green-800 hover:text-green-800">
                         More About DeKUT <i class="fa-solid fa-angle-right"></i>
-                    </button>
+                    </button> --}}
                     {{-- <button class="px-3 py-6 bg-green-800 text-white font-bold hover:bg-white hover:text-green-800">
                     More About DeKUT <i class="fa-solid fa-angle-right"></i>
                 </button> --}}
