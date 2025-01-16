@@ -47,7 +47,7 @@ class LoginController extends Controller
 
         // Regenerate session and redirect to dashboard
         $request->session()->regenerate();
-        return redirect()->intended('/'); // Redirect to a dashboard page
+        return redirect()->intended('/admin/dashboard'); // Redirect to a dashboard page
     }
 
     public function logout(Request $request)
