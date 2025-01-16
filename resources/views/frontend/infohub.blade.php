@@ -47,7 +47,7 @@
     <nav class="sticky top-0 md:py-12 text-white bg-green-800">
         <ul class="flex items-center justify-center gap-6">
             <li class="nav-item font-bold mr-2">
-                <a href="{{ url('/home') }}">Home</a>
+                <a href="{{ url('/') }}">Home</a>
             </li>
 
             <!-- Academics Dropdown -->
