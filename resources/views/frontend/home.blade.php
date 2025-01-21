@@ -1,9 +1,7 @@
 <x-frontend-layout>
 
     <div class="hero bg-cover h-screen md:h-[650px] bg-center text-white text-center py-36 flex flex-col justify-center"
-        style="
-    background-image: url('https://i.pinimg.com/736x/bf/1d/df/bf1ddf5a001515cfeb53f7f02879703e.jpg');
-  ">
+        style="background-image: url('{{ $backgroundImage }}');">
         <div class="w-5/6 mx-auto">
             <h1 class="animate-move md:text-8xl md:w-5/6 mx-auto sm:text-4xl text-2xl font-bold text-left md:px-6">
                 Welcome to Marketing Office,
