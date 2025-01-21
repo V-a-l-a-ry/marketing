@@ -14,6 +14,7 @@ use App\Http\Controllers\admin\ContentController;
 use App\Http\Controllers\frontend\ExhibitController;
 use App\Http\Controllers\admin\GalleryController;
 use App\Http\Controllers\frontend\ArticleController;
+use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\InfohubController;
 
 
@@ -102,9 +103,8 @@ Route::get('/newsletters', [ArticleController::class, 'index'])->name('newslette
 Route::get('newsletters/{newsletter}/download', [ArticleController::class, 'download'])->name('newsletters.download');
 
 // Frontend Home Route
-Route::get('/', function () {
-    return view('frontend.home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 // ------------------------------
 // Fallback Route
